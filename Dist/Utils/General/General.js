@@ -1,0 +1,5 @@
+import { runInAction } from "mobx";
+export function RunInAction(name, action) {
+    Object.defineProperty(action, "name", { value: name });
+    runInAction(action);
+}
