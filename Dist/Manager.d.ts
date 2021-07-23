@@ -2,6 +2,7 @@
 import { LogTypes } from "./Utils/General/Logging";
 import { Lib_RootState } from "./Store";
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
+import { n } from "./Utils/@Internal/Types.js";
 export declare class PermissionGroupSet {
     basic: boolean;
     verified: boolean;
@@ -27,14 +28,13 @@ export declare class Manager {
     GetStore: () => any;
     get store(): any;
     apollo: ApolloClient<NormalizedCacheObject>;
-    dbPath: string;
     FormatTime: (time: number, formatStr: string) => string;
     logTypes: LogTypes;
     ShowSignInPopup: () => void;
-    GetUserID: () => string;
-    GetUser: (id: string) => User;
+    GetUserID: () => string | n;
+    GetUser: (id: string) => User | n;
     GetUserPermissionGroups: (userID: string) => PermissionGroupSet;
-    GetNewURLForStoreChanges: (actionFunc: ActionFunc<Lib_RootState>) => string;
+    GetNewURLForStoreChanges: (actionFunc: ActionFunc<Lib_RootState>) => string | null;
     MarkdownRenderer: any;
     actionBarZIndex?: number;
 }

@@ -2,6 +2,7 @@ import { LogTypes } from "./Utils/General/Logging";
 import {CE} from "js-vextensions";
 import {Lib_RootState} from "./Store";
 import {ApolloClient, NormalizedCacheObject} from "@apollo/client";
+import {n} from "./Utils/@Internal/Types.js";
 
 export class PermissionGroupSet {
 	basic: boolean;
@@ -32,7 +33,7 @@ export class Manager {
 	GetStore: ()=>any;
 	get store() { return this.GetStore(); }
 	apollo: ApolloClient<NormalizedCacheObject>;
-	dbPath: string;
+	//dbPath: string;
 	/*storePath_mainData: string;
 	storePath_dbData: string;*/
 	FormatTime: (time: number, formatStr: string)=>string;
@@ -40,11 +41,11 @@ export class Manager {
 	logTypes = new LogTypes();
 
 	ShowSignInPopup: ()=>void;
-	GetUserID: ()=>string;
-	GetUser: (id: string)=>User;
+	GetUserID: ()=>string|n;
+	GetUser: (id: string)=>User|n;
 	GetUserPermissionGroups: (userID: string)=>PermissionGroupSet;
 
-	GetNewURLForStoreChanges: (actionFunc: ActionFunc<Lib_RootState>)=>string;
+	GetNewURLForStoreChanges: (actionFunc: ActionFunc<Lib_RootState>)=>string|null;
 
 	MarkdownRenderer: any; //(...props: any[])=>JSX.Element;
 	actionBarZIndex? = 11;
