@@ -8,7 +8,7 @@ import { GetProposal } from "../db/proposals.js";
 import { makeObservable, observable } from "mobx";
 import { CreateAccessor } from "mobx-graphlink";
 import { graph } from "../../Utils/Database/MobXGraphlink.js";
-export class Proposals {
+export class ProposalsState {
     constructor() {
         Object.defineProperty(this, "selectedProposalID", {
             enumerable: true,
@@ -33,13 +33,13 @@ export class Proposals {
 }
 __decorate([
     observable
-], Proposals.prototype, "selectedProposalID", void 0);
+], ProposalsState.prototype, "selectedProposalID", void 0);
 __decorate([
     observable
-], Proposals.prototype, "features_showCompleted", void 0);
+], ProposalsState.prototype, "features_showCompleted", void 0);
 __decorate([
     observable
-], Proposals.prototype, "issues_showCompleted", void 0);
+], ProposalsState.prototype, "issues_showCompleted", void 0);
 export const GetSelectedProposalID = CreateAccessor({ graph }, function () {
     return this["store"].main.proposals.selectedProposalID;
 });

@@ -5,14 +5,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { makeObservable, observable } from "mobx";
-import { Proposals } from "./main/proposals.js";
+import { ProposalsState } from "./main/proposals.js";
 export class MainState {
     constructor() {
         Object.defineProperty(this, "proposals", {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: new Proposals()
+            value: new ProposalsState()
         });
         makeObservable(this);
     }

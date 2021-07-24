@@ -12,6 +12,7 @@ import ReactDOM from "react-dom";
 import {observer} from "mobx-react";
 import {graph} from "../../Utils/Database/MobXGraphlink.js";
 import {Link} from "../../Utils/ReactComponents/Link.js";
+import {MGLObserver} from "mobx-graphlink";
 
 let portal: HTMLElement;
 OnPopulated(()=> {
@@ -40,7 +41,7 @@ OnPopulated(()=> {
 		index,
 	};
 })*/
-@observer
+@MGLObserver
 export class ProposalEntryUI extends BaseComponentPlus({} as ProposalEntryUI_Props, {}) {
 	innerRoot: Column;
 	render() {

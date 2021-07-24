@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { LogTypes } from "./Utils/General/Logging.js";
-import { Lib_RootState } from "./Store/index.js";
+import type { Lib_RootState } from "./Store/index.js";
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { n } from "./Utils/@Internal/Types.js";
 export declare class PermissionGroupSet {

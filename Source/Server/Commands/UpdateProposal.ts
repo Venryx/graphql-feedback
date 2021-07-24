@@ -27,6 +27,6 @@ export class UpdateProposal extends Command<{id: string, updates: Partial<MainTy
 	
 	DeclareDBUpdates(db: DBHelper) {
 		let {id} = this.payload;
-		db.set(dbp`proposals/${id}`, this.newData);
+		db.set(dbp`feedback_proposals/${id}`, this.newData);
 	}
 }

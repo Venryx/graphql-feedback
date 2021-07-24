@@ -3,6 +3,6 @@ import {UserData} from "./db/userData.js";
 import {Collection} from "mobx-graphlink";
 
 export interface Lib_DBShape {
-	proposals: Collection<Proposal>;
-	userData: Collection<UserData>;
+	feedback_proposals: Collection<Proposal>;
+	feedback_userData: Collection<UserData>;
 }

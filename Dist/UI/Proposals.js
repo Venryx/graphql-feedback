@@ -19,9 +19,8 @@ import { ToJSON, FromJSON, CE } from "js-vextensions";
 import { DragDropContext as DragDropContext_Beautiful, Droppable } from "react-beautiful-dnd";
 import { DroppableInfo } from "../Utils/UI/DNDStructures.js";
 import { store } from "../Store/index.js";
-import { observer } from "mobx-react";
 import { graph } from "../Utils/Database/MobXGraphlink.js";
-import { GetDocs } from "mobx-graphlink";
+import { GetDocs, MGLObserver } from "mobx-graphlink";
 import { RunInAction } from "../Utils/General/General.js";
 /*export class ProposalsUI_Outer extends BaseComponent<Props, {}> {
     render() {
@@ -83,7 +82,7 @@ Object.defineProperty(ProposalsUI, "defaultProps", {
     value: { subNavBarWidth: 0 }
 });
 ProposalsUI = __decorate([
-    observer
+    MGLObserver
 ], ProposalsUI);
 export { ProposalsUI };
 export function GetRankingScoreToAddForUserRankingIndex(indexInRankingOrder) {
@@ -104,7 +103,7 @@ let ProposalsColumn = class ProposalsColumn extends BaseComponentPlus({}, {}) {
     render() {
         let { proposals, type } = this.props;
         let userID = manager.GetUserID();
-        const userData = CE(GetDocs({ graph }, a => a.userData)).ToMap(a => a["_key"], a => a);
+        const userData = CE(GetDocs({ graph }, a => a.feedback_userData)).ToMap(a => a["_key"], a => a);
         const showCompleted = store.main.proposals[`${type}s_showCompleted`];
         let shownProposals = proposals.filter(a => a.type == type && (!a.completedAt || showCompleted));
         //let proposalsOrder = GetProposalsOrder(userID);
@@ -162,7 +161,7 @@ let ProposalsColumn = class ProposalsColumn extends BaseComponentPlus({}, {}) {
     }
 };
 ProposalsColumn = __decorate([
-    observer,
+    MGLObserver,
     ApplyBasicStyles
 ], ProposalsColumn);
 export { ProposalsColumn };
@@ -191,7 +190,7 @@ let ProposalsUserRankingColumn = class ProposalsUserRankingColumn extends BaseCo
     }
 };
 ProposalsUserRankingColumn = __decorate([
-    observer,
+    MGLObserver,
     ApplyBasicStyles
 ], ProposalsUserRankingColumn);
 export { ProposalsUserRankingColumn };

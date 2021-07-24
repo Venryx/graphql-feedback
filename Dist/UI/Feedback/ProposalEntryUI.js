@@ -14,9 +14,9 @@ import { GetRankingScoreToAddForUserRankingIndex } from "../Proposals.js";
 import { MakeDraggable } from "../../Utils/UI/DNDHelpers.js";
 import { DraggableInfo } from "../../Utils/UI/DNDStructures.js";
 import ReactDOM from "react-dom";
-import { observer } from "mobx-react";
 import { graph } from "../../Utils/Database/MobXGraphlink.js";
 import { Link } from "../../Utils/ReactComponents/Link.js";
+import { MGLObserver } from "mobx-graphlink";
 let portal;
 OnPopulated(() => {
     portal = document.createElement('div');
@@ -73,6 +73,6 @@ let ProposalEntryUI = class ProposalEntryUI extends BaseComponentPlus({}, {}) {
     }
 };
 ProposalEntryUI = __decorate([
-    observer
+    MGLObserver
 ], ProposalEntryUI);
 export { ProposalEntryUI };

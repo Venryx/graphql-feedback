@@ -20,7 +20,7 @@ let AddProposal = class AddProposal extends Command {
     }
     DeclareDBUpdates(db) {
         let { data } = this.payload;
-        db.set(dbp `proposals/${data.id}`, data);
+        db.set(dbp `feedback_proposals/${data.id}`, data);
     }
 };
 AddProposal = __decorate([

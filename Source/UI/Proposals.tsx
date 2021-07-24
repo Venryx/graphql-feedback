@@ -16,7 +16,7 @@ import {DroppableInfo, DraggableInfo} from "../Utils/UI/DNDStructures.js";
 import {store} from "../Store/index.js";
 import {observer} from "mobx-react";
 import {graph} from "../Utils/Database/MobXGraphlink.js";
-import {GetDocs} from "mobx-graphlink";
+import {GetDocs, MGLObserver} from "mobx-graphlink";
 import {RunInAction} from "../Utils/General/General.js";
 
 /*export class ProposalsUI_Outer extends BaseComponent<Props, {}> {
@@ -25,7 +25,7 @@ import {RunInAction} from "../Utils/General/General.js";
 	}
 }*/
 
-@observer
+@MGLObserver
 export class ProposalsUI extends BaseComponentPlus({subNavBarWidth: 0} as {subNavBarWidth: number}, {}) {
 	static defaultProps = {subNavBarWidth: 0};
 	
@@ -94,14 +94,14 @@ function GetIncompleteProposalsInOrder(order: string[], proposals: Proposal[]) {
 	});
 }
 
-@observer
+@MGLObserver
 @ApplyBasicStyles
 export class ProposalsColumn extends BaseComponentPlus({} as {proposals: Proposal[], type: string}, {}) {
 	render() {
 		let {proposals, type} = this.props;
 		let userID = manager.GetUserID();
 
-		const userData = CE(GetDocs({graph}, a=>a.userData)).ToMap(a=>a["_key"], a=>a);
+		const userData = CE(GetDocs({graph}, a=>a.feedback_userData)).ToMap(a=>a["_key"], a=>a);
 		const showCompleted = store.main.proposals[`${type}s_showCompleted`];
 
 		let shownProposals = proposals.filter(a=>a.type == type && (!a.completedAt || showCompleted));
@@ -176,7 +176,7 @@ export class ProposalsColumn extends BaseComponentPlus({} as {proposals: Proposa
 	}
 }
 
-@observer
+@MGLObserver
 @ApplyBasicStyles
 export class ProposalsUserRankingColumn extends BaseComponentPlus({} as {proposals: Proposal[]}, {}) {
 	render() {

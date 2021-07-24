@@ -1,5 +1,5 @@
 import { Proposal } from "../db/proposals/@Proposal.js";
-export declare class Proposals {
+export declare class ProposalsState {
     constructor();
     selectedProposalID: string;
     features_showCompleted: boolean;

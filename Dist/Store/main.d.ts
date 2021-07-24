@@ -1,5 +1,5 @@
-import { Proposals } from "./main/proposals.js";
+import { ProposalsState } from "./main/proposals.js";
 export declare class MainState {
     constructor();
-    proposals: Proposals;
+    proposals: ProposalsState;
 }

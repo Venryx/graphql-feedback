@@ -16,9 +16,10 @@ import {graph} from "../../Utils/Database/MobXGraphlink.js";
 import {runInAction} from "mobx";
 import {Link} from "../../Utils/ReactComponents/Link.js";
 import {observer} from "mobx-react";
+import {MGLObserver} from "mobx-graphlink";
 
 export type ProposalUI_Props = {proposal: Proposal, subNavBarWidth?: number};
-@observer
+@MGLObserver
 export class ProposalUI extends BaseComponent<ProposalUI_Props, {}> {
 	static defaultProps = {subNavBarWidth: 0};
 	render() {

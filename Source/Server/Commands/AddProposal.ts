@@ -27,6 +27,6 @@ export class AddProposal extends Command<{data: _MainType}, {id: string}> {
 	
 	DeclareDBUpdates(db: DBHelper) {
 		let {data} = this.payload;
-		db.set(dbp`proposals/${data.id}`, data);
+		db.set(dbp`feedback_proposals/${data.id}`, data);
 	}
 }

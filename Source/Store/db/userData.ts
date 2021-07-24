@@ -19,7 +19,7 @@ export const GetProposalOrder = StoreAccessor({graph}, s=>(userID: string): stri
 });*/
 export const GetProposalsOrder = CreateAccessor({graph}, (userID: string, undefinedForLoading = false): string[]=>{
 	if (userID == null) return emptyArray;
-	let userData = GetDoc({graph}, a=>a.userData.get(userID));
+	let userData = GetDoc({graph}, a=>a.feedback_userData.get(userID));
 	if (undefinedForLoading && userData === undefined) return undefined; // undefined from mobx-graphlink means still loading
 	return userData?.proposalsOrder || emptyArray;
 });

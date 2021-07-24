@@ -5,7 +5,7 @@ import {CreateAccessor} from "mobx-graphlink";
 import {graph} from "../../Utils/Database/MobXGraphlink.js";
 import {Lib_RootState} from "../index.js";
 
-export class Proposals {
+export class ProposalsState {
 	constructor() { makeObservable(this); }
 	@observable selectedProposalID: string;
 	@observable features_showCompleted: boolean;

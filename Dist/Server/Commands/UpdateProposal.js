@@ -33,7 +33,7 @@ let UpdateProposal = class UpdateProposal extends Command {
     }
     DeclareDBUpdates(db) {
         let { id } = this.payload;
-        db.set(dbp `proposals/${id}`, this.newData);
+        db.set(dbp `feedback_proposals/${id}`, this.newData);
     }
 };
 UpdateProposal = __decorate([
