@@ -1,11 +1,17 @@
-import {Command, DBHelper, dbp} from "mobx-graphlink";
-import {Proposal} from "../../index";
-import {AssertValidate} from "../Server";
+import {CE} from "js-vextensions";
+import {AssertValidate, Command, CommandMeta, DBHelper, dbp, GetSchemaJSON, NewSchema, SimpleSchema} from "mobx-graphlink";
+import {Proposal} from "../../index.js";
 
 export type _MainType = Proposal;
 let MTName = "Proposal";
 
 //@UserEdit
+@CommandMeta({
+	payloadSchema: ()=>SimpleSchema({
+		$data: {$ref: Proposal.name},
+	}),
+	returnSchema: ()=>SimpleSchema({$id: {type: "string"}}),
+})
 export class AddProposal extends Command<{data: _MainType}, {id: string}> {
 	Validate() {
 		let {data} = this.payload;

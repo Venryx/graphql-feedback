@@ -1,6 +1,6 @@
-import {OnPopulated, manager, Manager} from "../../Manager";
-import {store} from "../../Store";
-import {graph} from "./MobXGraphlink";
+import {OnPopulated, manager, Manager} from "../../Manager.js";
+import {store} from "../../Store/index.js";
+import {graph} from "./MobXGraphlink.js";
 
 OnPopulated(()=> {
 	store.graphlink = graph;

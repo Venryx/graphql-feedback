@@ -8,15 +8,15 @@ import { E, CE } from "js-vextensions";
 import React from "react";
 import { Button, Row } from "react-vcomponents";
 import { BaseComponentPlus } from "react-vextensions";
-import { manager, OnPopulated } from "../../Manager";
-import { SetProposalOrder } from "../../Server/Commands/SetProposalOrder";
-import { GetRankingScoreToAddForUserRankingIndex } from "../Proposals";
-import { MakeDraggable } from "../../Utils/UI/DNDHelpers";
-import { DraggableInfo } from "../../Utils/UI/DNDStructures";
+import { manager, OnPopulated } from "../../Manager.js";
+import { SetProposalOrder } from "../../Server/Commands/SetProposalOrder.js";
+import { GetRankingScoreToAddForUserRankingIndex } from "../Proposals.js";
+import { MakeDraggable } from "../../Utils/UI/DNDHelpers.js";
+import { DraggableInfo } from "../../Utils/UI/DNDStructures.js";
 import ReactDOM from "react-dom";
 import { observer } from "mobx-react";
-import { graph } from "../../Utils/Database/MobXGraphlink";
-import { Link } from "../../Utils/ReactComponents/Link";
+import { graph } from "../../Utils/Database/MobXGraphlink.js";
+import { Link } from "../../Utils/ReactComponents/Link.js";
 let portal;
 OnPopulated(() => {
     portal = document.createElement('div');
@@ -41,6 +41,15 @@ OnPopulated(() => {
     };
 })*/
 let ProposalEntryUI = class ProposalEntryUI extends BaseComponentPlus({}, {}) {
+    constructor() {
+        super(...arguments);
+        Object.defineProperty(this, "innerRoot", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
     render() {
         let { index, last, proposal, orderIndex, rankingScore, columnType, style, dragInfo } = this.props;
         const creator = proposal && manager.GetUser(proposal.creator);

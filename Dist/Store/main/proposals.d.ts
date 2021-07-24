@@ -1,5 +1,6 @@
-import { Proposal } from "../db/proposals/@Proposal";
+import { Proposal } from "../db/proposals/@Proposal.js";
 export declare class Proposals {
+    constructor();
     selectedProposalID: string;
     features_showCompleted: boolean;
     issues_showCompleted: boolean;

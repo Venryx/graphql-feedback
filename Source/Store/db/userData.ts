@@ -1,8 +1,6 @@
-import {AddSchema} from "../../Server/Server";
-import {CE} from "js-vextensions";
 import {CreateAccessor, GetDoc} from "mobx-graphlink";
-import {graph} from "../../Utils/Database/MobXGraphlink";
-import {emptyArray} from "../../General";
+import {emptyArray} from "../../General.js";
+import {graph} from "../../Utils/Database/MobXGraphlink.js";
 
 export interface UserData {
 	//proposalIndexes: ProposalIndexSet;

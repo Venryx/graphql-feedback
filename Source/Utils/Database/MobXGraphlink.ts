@@ -1,6 +1,6 @@
 import {Graphlink} from "mobx-graphlink";
-import {Lib_RootState} from "../../Store";
-import {Lib_DBShape} from "../../Store/db";
+import {Lib_RootState} from "../../Store/index.js";
+import {Lib_DBShape} from "../../Store/db.js";
 
 /*export let graph: Graphlink<Lib_RootState, Lib_DBShape>;
 OnPopulated(()=> {
@@ -14,5 +14,6 @@ export let graph = new Graphlink<Lib_RootState, Lib_DBShape>();
 
 // do this last, so that graph instance is created before MobXGraphlink_Init imports the store-accessors (which require the graph instance)
 //require("./MobXGraphlink_Init.js");
-declare var require; // we assume webpack or the like is being used
-require("./MobXGraphlink_Init.js");
+/*declare var require; // we assume webpack or the like is being used
+require("./MobXGraphlink_Init.js");*/
+import("./MobXGraphlink_Init.js");

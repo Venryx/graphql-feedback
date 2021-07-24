@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-import { Proposal } from "../Store/db/proposals/@Proposal";
+import { Proposal } from "../Store/db/proposals/@Proposal.js";
 declare const ProposalsUI_base: (new (..._: any[]) => BaseComponent<{
     subNavBarWidth: number;
 }, {}, unknown>) & {

@@ -1,8 +1,15 @@
 import {CE} from "js-vextensions";
-import {GetAsync, GetDoc, Command, AssertV, WrapDBValue, DBHelper, dbp} from "mobx-graphlink";
-import {graph} from "../../Utils/Database/MobXGraphlink";
-import {GetProposalsOrder} from "../../Store/db/userData";
+import {GetAsync, GetDoc, Command, AssertV, WrapDBValue, DBHelper, dbp, SimpleSchema, CommandMeta} from "mobx-graphlink";
+import {graph} from "../../Utils/Database/MobXGraphlink.js";
+import {GetProposalsOrder} from "../../Store/db/userData.js";
 
+@CommandMeta({
+	payloadSchema: ()=>SimpleSchema({
+		$proposalID: {$ref: "UUID"},
+		$userID: {$ref: "UUID"},
+		$index: {type: "number"},
+	}),
+})
 export class SetProposalOrder extends Command<{proposalID: string, userID: string, index: number}> {
 	newOrder: string[];
 	Validate() {

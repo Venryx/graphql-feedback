@@ -8,19 +8,19 @@ import React from "react";
 import { Button, CheckBox, Column, Row } from "react-vcomponents";
 import { ApplyBasicStyles, GetDOM, BaseComponentPlus } from "react-vextensions";
 import { ScrollView } from "react-vscrollview";
-import { manager } from "../Manager";
-import { SetProposalOrder } from "../Server/Commands/SetProposalOrder";
-import { GetSelectedProposal } from "../Store/main/proposals";
-import { GetProposalsOrder, GetProposals } from "../index";
-import { ShowAddProposalDialog } from "./Feedback/Proposal/ProposalDetailsUI";
-import { ProposalEntryUI } from "./Feedback/ProposalEntryUI";
-import { ProposalUI } from "./Feedback/ProposalUI";
+import { manager } from "../Manager.js";
+import { SetProposalOrder } from "../Server/Commands/SetProposalOrder.js";
+import { GetSelectedProposal } from "../Store/main/proposals.js";
+import { GetProposalsOrder, GetProposals } from "../index.js";
+import { ShowAddProposalDialog } from "./Feedback/Proposal/ProposalDetailsUI.js";
+import { ProposalEntryUI } from "./Feedback/ProposalEntryUI.js";
+import { ProposalUI } from "./Feedback/ProposalUI.js";
 import { ToJSON, FromJSON, CE } from "js-vextensions";
 import { DragDropContext as DragDropContext_Beautiful, Droppable } from "react-beautiful-dnd";
-import { DroppableInfo } from "../Utils/UI/DNDStructures";
-import { store } from "../Store";
+import { DroppableInfo } from "../Utils/UI/DNDStructures.js";
+import { store } from "../Store/index.js";
 import { observer } from "mobx-react";
-import { graph } from "../Utils/Database/MobXGraphlink";
+import { graph } from "../Utils/Database/MobXGraphlink.js";
 import { GetDocs } from "mobx-graphlink";
 import { RunInAction } from "../Utils/General/General.js";
 /*export class ProposalsUI_Outer extends BaseComponent<Props, {}> {
@@ -31,24 +31,29 @@ import { RunInAction } from "../Utils/General/General.js";
 let ProposalsUI = class ProposalsUI extends BaseComponentPlus({ subNavBarWidth: 0 }, {}) {
     constructor() {
         super(...arguments);
-        this.OnDragEnd = result => {
-            const sourceDroppableInfo = FromJSON(result.source.droppableId);
-            const sourceIndex = result.source.index;
-            const targetDroppableInfo = result.destination && FromJSON(result.destination.droppableId);
-            let targetIndex = result.destination && result.destination.index;
-            const draggableInfo = FromJSON(result.draggableId);
-            if (targetDroppableInfo == null) {
-            }
-            else if (targetDroppableInfo.type == "ProposalsUserRankingColumn") {
-                if (manager.GetUserID() == null)
-                    return void manager.ShowSignInPopup();
-                // if we're moving an item to later in the same list, increment the target-index again (since react-beautiful-dnd pre-applies target-index adjustment, unlike the rest of our code that uses SetBookEventIndex/Array.Move())
-                if (sourceDroppableInfo.type == targetDroppableInfo.type && sourceIndex < targetIndex) {
-                    targetIndex++;
+        Object.defineProperty(this, "OnDragEnd", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: result => {
+                const sourceDroppableInfo = FromJSON(result.source.droppableId);
+                const sourceIndex = result.source.index;
+                const targetDroppableInfo = result.destination && FromJSON(result.destination.droppableId);
+                let targetIndex = result.destination && result.destination.index;
+                const draggableInfo = FromJSON(result.draggableId);
+                if (targetDroppableInfo == null) {
                 }
-                new SetProposalOrder({ graph }, { proposalID: draggableInfo.proposalID, userID: manager.GetUserID(), index: targetIndex }).RunOnServer();
+                else if (targetDroppableInfo.type == "ProposalsUserRankingColumn") {
+                    if (manager.GetUserID() == null)
+                        return void manager.ShowSignInPopup();
+                    // if we're moving an item to later in the same list, increment the target-index again (since react-beautiful-dnd pre-applies target-index adjustment, unlike the rest of our code that uses SetBookEventIndex/Array.Move())
+                    if (sourceDroppableInfo.type == targetDroppableInfo.type && sourceIndex < targetIndex) {
+                        targetIndex++;
+                    }
+                    new SetProposalOrder({ graph }, { proposalID: draggableInfo.proposalID, userID: manager.GetUserID(), index: targetIndex }).RunOnServer();
+                }
             }
-        };
+        });
     }
     /*constructor(props) {
         super(props);
@@ -71,7 +76,12 @@ let ProposalsUI = class ProposalsUI extends BaseComponentPlus({ subNavBarWidth: 
                 React.createElement(ProposalsUserRankingColumn, { proposals: proposals, ml: 10 }))));
     }
 };
-ProposalsUI.defaultProps = { subNavBarWidth: 0 };
+Object.defineProperty(ProposalsUI, "defaultProps", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: { subNavBarWidth: 0 }
+});
 ProposalsUI = __decorate([
     observer
 ], ProposalsUI);

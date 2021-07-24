@@ -1,4 +1,4 @@
-import { Proposal } from "./proposals/@Proposal";
+import { Proposal } from "./proposals/@Proposal.js";
 export declare const GetProposal: ((id: string) => Proposal) & {
     Async: (id: string) => Promise<Proposal>;
     Wait: (id: string) => Proposal;

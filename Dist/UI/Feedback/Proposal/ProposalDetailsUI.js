@@ -4,11 +4,11 @@ import { Column, Pre, Row, RowLR, TextInput } from "react-vcomponents";
 import { BaseComponent, GetDOM } from "react-vextensions";
 import { MarkdownEditor, MarkdownToolbar } from "react-vmarkdown";
 import { ShowMessageBox } from "react-vmessagebox";
-import { AddProposal } from "../../../Server/Commands/AddProposal";
-import { Proposal } from "../../../Store/db/proposals/@Proposal";
-import { store } from "../../../Store";
-import { graph } from "../../../Utils/Database/MobXGraphlink";
-import { Link } from "../../../Utils/ReactComponents/Link";
+import { AddProposal } from "../../../Server/Commands/AddProposal.js";
+import { Proposal } from "../../../Store/db/proposals/@Proposal.js";
+import { store } from "../../../Store/index.js";
+import { graph } from "../../../Utils/Database/MobXGraphlink.js";
+import { Link } from "../../../Utils/ReactComponents/Link.js";
 import { RunInAction } from "../../../Utils/General/General.js";
 let aa = { MarkdownEditor };
 let MTName = "Proposal";
@@ -52,7 +52,12 @@ export class ProposalDetailsUI extends BaseComponent {
         return Clone(newData);
     }
 }
-ProposalDetailsUI.defaultProps = { enabled: true };
+Object.defineProperty(ProposalDetailsUI, "defaultProps", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: { enabled: true }
+});
 export function ShowAddProposalDialog(userID, type) {
     let newEntry = new Proposal({ type });
     let detailsUI;

@@ -1,6 +1,6 @@
-import { OnPopulated, manager } from "../../Manager";
-import { store } from "../../Store";
-import { graph } from "./MobXGraphlink";
+import { OnPopulated, manager } from "../../Manager.js";
+import { store } from "../../Store/index.js";
+import { graph } from "./MobXGraphlink.js";
 OnPopulated(() => {
     store.graphlink = graph;
     // now that manager.dbPath is populated, we can initialize the Graphlink

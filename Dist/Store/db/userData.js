@@ -1,6 +1,6 @@
 import { CreateAccessor, GetDoc } from "mobx-graphlink";
-import { graph } from "../../Utils/Database/MobXGraphlink";
-import { emptyArray } from "../../General";
+import { emptyArray } from "../../General.js";
+import { graph } from "../../Utils/Database/MobXGraphlink.js";
 /*export type ProposalIndexSet = { [key: number]: string; }; // index -> proposalID
 AddSchema({patternProperties: {"^[0-9]+$": {type: "number"}}}, "ProposalIndexSet");*/
 /*export const GetProposalIndexes = StoreAccessor({graph}, s=>(userID: string): ProposalIndexSet => {

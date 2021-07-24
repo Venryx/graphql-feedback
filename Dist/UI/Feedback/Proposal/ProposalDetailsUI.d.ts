@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-import { Proposal } from "../../../Store/db/proposals/@Proposal";
+import { Proposal } from "../../../Store/db/proposals/@Proposal.js";
 export declare type _MainType = Proposal;
 export declare type ProposalDetailsUI_Props = {
     baseData: _MainType;

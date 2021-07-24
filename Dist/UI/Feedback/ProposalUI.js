@@ -9,15 +9,15 @@ import { Button, CheckBox, Column, Row, Span, Text } from "react-vcomponents";
 import { BaseComponent, BaseComponentPlus } from "react-vextensions";
 import { ShowMessageBox } from "react-vmessagebox";
 import { ScrollView } from "react-vscrollview";
-import { IsUserAdmin, IsUserCreatorOrMod } from "../../General";
-import { manager } from "../../Manager";
-import { DeleteProposal } from "../../Server/Commands/DeleteProposal";
-import { UpdateProposal } from "../../Server/Commands/UpdateProposal";
-import { GetUpdates } from "../../Utils/Database/DatabaseHelpers";
-import { colors } from "../GlobalStyles";
-import { ProposalDetailsUI } from "./Proposal/ProposalDetailsUI";
-import { graph } from "../../Utils/Database/MobXGraphlink";
-import { Link } from "../../Utils/ReactComponents/Link";
+import { IsUserAdmin, IsUserCreatorOrMod } from "../../General.js";
+import { manager } from "../../Manager.js";
+import { DeleteProposal } from "../../Server/Commands/DeleteProposal.js";
+import { UpdateProposal } from "../../Server/Commands/UpdateProposal.js";
+import { GetUpdates } from "../../Utils/Database/DatabaseHelpers.js";
+import { colors } from "../GlobalStyles.js";
+import { ProposalDetailsUI } from "./Proposal/ProposalDetailsUI.js";
+import { graph } from "../../Utils/Database/MobXGraphlink.js";
+import { Link } from "../../Utils/ReactComponents/Link.js";
 import { observer } from "mobx-react";
 let ProposalUI = class ProposalUI extends BaseComponent {
     render() {
@@ -40,12 +40,26 @@ let ProposalUI = class ProposalUI extends BaseComponent {
                     React.createElement(Column, null)))));
     }
 };
-ProposalUI.defaultProps = { subNavBarWidth: 0 };
+Object.defineProperty(ProposalUI, "defaultProps", {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: { subNavBarWidth: 0 }
+});
 ProposalUI = __decorate([
     observer
 ], ProposalUI);
 export { ProposalUI };
 let ProposalUI_Inner = class ProposalUI_Inner extends BaseComponentPlus({}, { editing: false, dataError: null }) {
+    constructor() {
+        super(...arguments);
+        Object.defineProperty(this, "editorUI", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
     render() {
         let { proposal } = this.props;
         const creator = manager.GetUser(proposal.creator);

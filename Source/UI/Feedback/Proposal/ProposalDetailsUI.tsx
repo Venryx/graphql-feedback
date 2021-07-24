@@ -4,12 +4,12 @@ import { Column, Pre, Row, RowLR, TextInput } from "react-vcomponents";
 import { BaseComponent, GetInnerComp, GetDOM } from "react-vextensions";
 import { MarkdownEditor, MarkdownToolbar } from "react-vmarkdown";
 import { BoxController, ShowMessageBox } from "react-vmessagebox";
-import { AddProposal } from "../../../Server/Commands/AddProposal";
-import { Proposal } from "../../../Store/db/proposals/@Proposal";
-import {store} from "../../../Store";
+import { AddProposal } from "../../../Server/Commands/AddProposal.js";
+import { Proposal } from "../../../Store/db/proposals/@Proposal.js";
+import {store} from "../../../Store/index.js";
 import {runInAction} from "mobx";
-import {graph} from "../../../Utils/Database/MobXGraphlink";
-import {Link} from "../../../Utils/ReactComponents/Link";
+import {graph} from "../../../Utils/Database/MobXGraphlink.js";
+import {Link} from "../../../Utils/ReactComponents/Link.js";
 import {RunInAction} from "../../../Utils/General/General.js";
 
 let aa = {MarkdownEditor} as any;

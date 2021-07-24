@@ -1,5 +1,5 @@
-import { Proposal } from "../../Store/db/proposals/@Proposal";
 import { Command, DBHelper } from "mobx-graphlink";
+import { Proposal } from "../../Store/db/proposals/@Proposal.js";
 declare type MainType = Proposal;
 export declare class UpdateProposal extends Command<{
     id: string;

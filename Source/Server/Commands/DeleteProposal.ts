@@ -1,21 +1,24 @@
-import {GetProposal} from "../../Store/db/proposals";
-import {SetProposalOrder} from "./SetProposalOrder";
-import {CE, emptyArray_forLoading} from "js-vextensions";
-import {GetAsync, GetDocs, Command, AssertV, dbp, DBHelper} from "mobx-graphlink";
-import {graph} from "../../Utils/Database/MobXGraphlink";
+import {GetProposal} from "../../Store/db/proposals.js";
+import {SetProposalOrder} from "./SetProposalOrder.js";
+import {CE, emptyArray_forLoading, NN} from "js-vextensions";
+import {GetAsync, GetDocs, Command, AssertV, dbp, DBHelper, CommandMeta, SimpleSchema} from "mobx-graphlink";
+import {graph} from "../../Utils/Database/MobXGraphlink.js";
 
 //@UserEdit
+@CommandMeta({
+	payloadSchema: ()=>SimpleSchema({
+		$id: {$ref: "UUID"},
+	}),
+})
 export class DeleteProposal extends Command<{id: string}> {
 	//posts: Post[];
 	sub_removalsFromUserOrderings: SetProposalOrder[];
 	Validate() {
 		let {id} = this.payload;
-		let proposal = GetProposal(id);
-		AssertV(proposal, "proposal is null.");
+		let proposal = NN(GetProposal(id));
 		//this.posts = await GetAsync(()=>GetProposalPosts(proposal));
 
 		let userDatas = GetDocs({graph}, a=>a.userData);
-		AssertV(userDatas != emptyArray_forLoading, "userDatas is still loading.");
 		this.sub_removalsFromUserOrderings = [];
 		//let userDatasWithOrderingContainingProposal = userDatas.filter(userData=>CE(CE(userData.proposalIndexes).VValues(true)).Contains(id));
 		let userDatasWithOrderingContainingProposal = userDatas.filter(userData=>CE(userData.proposalsOrder).Contains(id));

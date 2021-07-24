@@ -1,4 +1,4 @@
-//import uuidV4 from 'uuid/v4';
+//import uuidV4 from "uuid/v4";
 import slugid from "slugid";
 
 export function GenerateUUID(): string {

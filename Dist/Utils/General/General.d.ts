@@ -1,1 +1,1 @@
-export declare function RunInAction(name: string, action: () => any): void;
+export declare function RunInAction(name: string, action: () => any): any;

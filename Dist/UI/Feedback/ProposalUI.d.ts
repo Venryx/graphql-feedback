@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { BaseComponent } from "react-vextensions";
-import { Proposal } from "../../Store/db/proposals/@Proposal";
-import { ProposalDetailsUI } from "./Proposal/ProposalDetailsUI";
+import { Proposal } from "../../Store/db/proposals/@Proposal.js";
+import { ProposalDetailsUI } from "./Proposal/ProposalDetailsUI.js";
 export declare type ProposalUI_Props = {
     proposal: Proposal;
     subNavBarWidth?: number;

@@ -2,8 +2,8 @@ import {VURL, Assert, GetCurrentURLString, Clone} from "js-vextensions";
 import React from "react";
 import {BaseComponent, FilterOutUnrecognizedProps, BaseComponentPlus} from "react-vextensions";
 import {runInAction} from "mobx";
-import {Lib_RootState, store} from "../../Store";
-import {manager} from "../../Manager";
+import {Lib_RootState, store} from "../../Store/index.js";
+import {manager} from "../../Manager.js";
 import {RunInAction} from "../General/General.js";
 
 export function GetCurrentURL() {

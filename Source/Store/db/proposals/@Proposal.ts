@@ -1,34 +1,41 @@
-import {AddSchema} from "../../../Server/Server";
 import {CE} from "js-vextensions";
+import {DB, Field, MGLClass} from "mobx-graphlink";
 
+@MGLClass({table: "feedback_proposals"})
 export class Proposal {
 	constructor(initialData: Partial<Proposal>) {
 		CE(this).Extend(initialData);
 	}
 
+	@DB((t, n)=>t.text(n).primary())
+	@Field({$ref: "UUID"}, {opt: true})
 	id: string;
-	type: string;
-	title = "";
-	text = "";
-	//completed: boolean;
 
+	@DB((t, n)=>t.text(n))
+	@Field({type: "string"})
+	type: string;
+
+	@DB((t, n)=>t.text(n))
+	@Field({type: "string"})
+	title = "";
+
+	@DB((t, n)=>t.text(n))
+	@Field({type: "string"})
+	text = "";
+
+	@DB((t, n)=>t.text(n).references("id").inTable(`users`).DeferRef())
+	@Field({type: "string"}, {opt: true})
 	creator: string;
+
+	@DB((t, n)=>t.bigInteger(n))
+	@Field({type: "number"}, {opt: true})
 	createdAt: number;
+	
+	@DB((t, n)=>t.bigInteger(n))
+	@Field({type: "number"}, {opt: true})
 	editedAt: number;
+	
+	@DB((t, n)=>t.bigInteger(n))
+	@Field({type: "number"}, {opt: true})
 	completedAt: number;
 }
-
-AddSchema({
-	properties: {
-		type: {type: "string"},
-		title: {type: "string"},
-		text: {type: "string"},
-		//completed: {type: ["null", "boolean"]},
-		
-		creator: {type: "string"},
-		createdAt: {type: "number"},
-		editedAt: {type: "number"},
-		completedAt: {type: ["null", "number"]},
-	},
-	required: ["type", "title", "text", "creator", "createdAt"],
-}, "Proposal");

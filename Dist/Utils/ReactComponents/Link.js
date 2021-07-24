@@ -1,8 +1,8 @@
 import { VURL, Assert, GetCurrentURLString } from "js-vextensions";
 import React from "react";
 import { FilterOutUnrecognizedProps, BaseComponentPlus } from "react-vextensions";
-import { store } from "../../Store";
-import { manager } from "../../Manager";
+import { store } from "../../Store/index.js";
+import { manager } from "../../Manager.js";
 import { RunInAction } from "../General/General.js";
 export function GetCurrentURL() {
     return VURL.Parse(GetCurrentURLString());
