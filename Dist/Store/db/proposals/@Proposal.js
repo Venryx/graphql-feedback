@@ -84,11 +84,11 @@ __decorate([
     Field({ type: "number" }, { opt: true })
 ], Proposal.prototype, "createdAt", void 0);
 __decorate([
-    DB((t, n) => t.bigInteger(n)),
+    DB((t, n) => t.bigInteger(n).nullable()),
     Field({ type: "number" }, { opt: true })
 ], Proposal.prototype, "editedAt", void 0);
 __decorate([
-    DB((t, n) => t.bigInteger(n)),
+    DB((t, n) => t.bigInteger(n).nullable()),
     Field({ type: "number" }, { opt: true })
 ], Proposal.prototype, "completedAt", void 0);
 Proposal = __decorate([

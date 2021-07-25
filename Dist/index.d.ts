@@ -1,5 +1,4 @@
 import "js-vextensions";
-import "codemirror/addon/scroll/simplescrollbars.js";
 export { Manager as Feedback_Manager, manager as feedback_manager } from "./Manager.js";
 export * from "./Server/Commands/AddProposal.js";
 export * from "./Server/Commands/DeleteProposal.js";
@@ -11,7 +10,6 @@ export * from "./Store/main/proposals.js";
 export { Lib_DBShape as Feedback_DBShape } from "./Store/db.js";
 export * from "./Store/db/proposals.js";
 export * from "./Store/db/proposals/@Proposal.js";
-export * from "./Store/db/userData.js";
-export * from "./Store/db/userData/@UserData.js";
-export { graph as feedback_graph } from "./Utils/Database/MobXGraphlink.js";
+export * from "./Store/db/userInfos.js";
+export { UserInfo as Feedback_UserInfo } from "./Store/db/userInfos/@UserInfo.js";
 export * from "./UI/Proposals.js";

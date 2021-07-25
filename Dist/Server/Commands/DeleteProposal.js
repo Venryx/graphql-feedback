@@ -4,11 +4,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+import { CE, NN } from "js-vextensions";
+import { Command, CommandMeta, dbp, GetDocs, SimpleSchema } from "mobx-graphlink";
 import { GetProposal } from "../../Store/db/proposals.js";
 import { SetProposalOrder } from "./SetProposalOrder.js";
-import { CE, NN } from "js-vextensions";
-import { GetDocs, Command, dbp, CommandMeta, SimpleSchema } from "mobx-graphlink";
-import { graph } from "../../Utils/Database/MobXGraphlink.js";
 //@UserEdit
 let DeleteProposal = class DeleteProposal extends Command {
     constructor() {
@@ -18,19 +17,19 @@ let DeleteProposal = class DeleteProposal extends Command {
             enumerable: true,
             configurable: true,
             writable: true,
-            value: void 0
+            value: []
         });
     }
     Validate() {
         let { id } = this.payload;
         let proposal = NN(GetProposal(id));
         //this.posts = await GetAsync(()=>GetProposalPosts(proposal));
-        let userDatas = GetDocs({ graph }, a => a.feedback_userDatas);
+        let userInfos = GetDocs({}, a => a.feedback_userInfos);
         this.sub_removalsFromUserOrderings = [];
         //let userDatasWithOrderingContainingProposal = userDatas.filter(userData=>CE(CE(userData.proposalIndexes).VValues(true)).Contains(id));
-        let userDatasWithOrderingContainingProposal = userDatas.filter(userData => CE(userData.proposalsOrder).Contains(id));
-        for (let userID of userDatasWithOrderingContainingProposal.map(userData => userData["_key"])) {
-            let subcommand = new SetProposalOrder({ graph }, { proposalID: id, userID, index: -1 });
+        let userInfosWithOrderingContainingProposal = userInfos.filter(userData => CE(userData.proposalsOrder).Contains(id));
+        for (let userID of userInfosWithOrderingContainingProposal.map(userData => userData.id)) {
+            let subcommand = new SetProposalOrder({ proposalID: id, userID, index: -1 }).MarkAsSubcommand(this);
             subcommand.Validate();
             this.sub_removalsFromUserOrderings.push(subcommand);
         }

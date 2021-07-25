@@ -25,13 +25,13 @@ export type User = {
 };
 
 export class Manager {
-	Populate(data: Omit<Manager, "Populate" | "store">) {
+	Populate(data: Omit<Manager, "Populate" | "rootStore">) {
 		CE(this).Extend(data);
 		OnPopulated_listeners.forEach(a=>a());
 	}
 
 	GetStore: ()=>any;
-	get store() { return this.GetStore(); }
+	get rootStore() { return this.GetStore(); }
 	apollo: ApolloClient<NormalizedCacheObject>;
 	//dbPath: string;
 	/*storePath_mainData: string;

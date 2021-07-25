@@ -1,5 +1,5 @@
-import { SetProposalOrder } from "./SetProposalOrder.js";
 import { Command, DBHelper } from "mobx-graphlink";
+import { SetProposalOrder } from "./SetProposalOrder.js";
 export declare class DeleteProposal extends Command<{
     id: string;
 }> {

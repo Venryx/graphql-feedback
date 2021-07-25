@@ -5,8 +5,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { CE } from "js-vextensions";
-import { Command, AssertV, dbp, SimpleSchema, CommandMeta } from "mobx-graphlink";
-import { GetProposalsOrder } from "../../Store/db/userData.js";
+import { Command, dbp, SimpleSchema, CommandMeta } from "mobx-graphlink";
+import { GetProposalsOrder } from "../../Store/db/userInfos.js";
 let SetProposalOrder = class SetProposalOrder extends Command {
     constructor() {
         super(...arguments);
@@ -19,9 +19,8 @@ let SetProposalOrder = class SetProposalOrder extends Command {
     }
     Validate() {
         let { proposalID, userID, index } = this.payload;
-        //let oldIndexes = (await GetAsync(()=>GetDoc({graph}, a=>a.userData.get(userID))))?.proposalOrder || {};
-        let oldOrder = GetProposalsOrder(userID, true);
-        AssertV(oldOrder !== undefined, "oldOrder is still loading.");
+        //let oldIndexes = (await GetAsync(()=>GetDoc(a=>a.userData.get(userID))))?.proposalOrder || {};
+        let oldOrder = GetProposalsOrder(userID);
         //let idsOrdered = CE(oldIndexes).VValues(true);
         //let newOrder = oldOrder.slice();
         this.newOrder = oldOrder.slice();
@@ -39,7 +38,7 @@ let SetProposalOrder = class SetProposalOrder extends Command {
         let { userID, proposalID } = this.payload;
         //updates[`userData/${userID}/.proposalsOrder`] = WrapDBValue(this.newOrder, {merge: true});
         //db.set(dbp`feedback_userData/${userID}/.proposalsOrder`, this.newOrder);
-        db.set(dbp `feedback_userData/${userID}`, {
+        db.set(dbp `feedback_userInfos/${userID}`, {
             id: this.userInfo.id,
             proposalsOrder: this.newOrder,
         });

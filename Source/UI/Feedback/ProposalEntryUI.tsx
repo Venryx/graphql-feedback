@@ -10,7 +10,6 @@ import {MakeDraggable, DragInfo} from "../../Utils/UI/DNDHelpers.js";
 import {DraggableInfo} from "../../Utils/UI/DNDStructures.js";
 import ReactDOM from "react-dom";
 import {observer} from "mobx-react";
-import {graph} from "../../Utils/Database/MobXGraphlink.js";
 import {Link} from "../../Utils/ReactComponents/Link.js";
 import {MGLObserver} from "mobx-graphlink";
 
@@ -66,7 +65,7 @@ export class ProposalEntryUI extends BaseComponentPlus({} as ProposalEntryUI_Pro
 					</span>
 					{columnType == "userRanking" && !asDragPreview &&
 						<Button text="X" style={{margin: "-3px 0 -3px 5px", padding: "3px 5px"}} onClick={()=> {
-							new SetProposalOrder({graph}, {proposalID: proposal.id, userID: manager.GetUserID(), index: -1}).RunOnServer();
+							new SetProposalOrder({proposalID: proposal.id, userID: manager.GetUserID(), index: -1}).RunOnServer();
 						}}/>}
 				</Row>
 			</div>

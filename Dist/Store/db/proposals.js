@@ -1,10 +1,9 @@
 import { GetDoc, GetDocs, CreateAccessor } from "mobx-graphlink";
-import { graph } from "../../Utils/Database/MobXGraphlink.js";
-export const GetProposal = CreateAccessor({ graph }, (id) => {
+export const GetProposal = CreateAccessor((id) => {
     if (id == null)
         return null;
-    return GetDoc({ graph }, a => a.feedback_proposals.get(id));
+    return GetDoc({}, a => a.feedback_proposals.get(id));
 });
-export const GetProposals = CreateAccessor({ graph }, () => {
-    return GetDocs({ graph }, a => a.feedback_proposals);
+export const GetProposals = CreateAccessor(() => {
+    return GetDocs({}, a => a.feedback_proposals);
 });

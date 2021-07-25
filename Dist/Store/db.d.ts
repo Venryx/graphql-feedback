@@ -1,7 +1,13 @@
 import { Proposal } from "./db/proposals/@Proposal.js";
 import { Collection } from "mobx-graphlink";
-import { UserData } from "./db/userData/@UserData.js";
+import { UserInfo } from "./db/userInfos/@UserInfo.js";
+declare module "mobx-graphlink/Dist/UserTypes" {
+    interface UT_DBShape {
+        feedback_proposals: Collection<Proposal>;
+        feedback_userInfos: Collection<UserInfo>;
+    }
+}
 export interface Lib_DBShape {
     feedback_proposals: Collection<Proposal>;
-    feedback_userDatas: Collection<UserData>;
+    feedback_userInfos: Collection<UserInfo>;
 }

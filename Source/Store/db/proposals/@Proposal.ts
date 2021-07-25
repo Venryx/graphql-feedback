@@ -31,11 +31,11 @@ export class Proposal {
 	@Field({type: "number"}, {opt: true})
 	createdAt: number;
 	
-	@DB((t, n)=>t.bigInteger(n))
+	@DB((t, n)=>t.bigInteger(n).nullable())
 	@Field({type: "number"}, {opt: true})
 	editedAt: number;
 	
-	@DB((t, n)=>t.bigInteger(n))
+	@DB((t, n)=>t.bigInteger(n).nullable())
 	@Field({type: "number"}, {opt: true})
 	completedAt: number;
 }

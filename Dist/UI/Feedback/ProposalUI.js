@@ -16,9 +16,7 @@ import { UpdateProposal } from "../../Server/Commands/UpdateProposal.js";
 import { GetUpdates } from "../../Utils/Database/DatabaseHelpers.js";
 import { colors } from "../GlobalStyles.js";
 import { ProposalDetailsUI } from "./Proposal/ProposalDetailsUI.js";
-import { graph } from "../../Utils/Database/MobXGraphlink.js";
 import { Link } from "../../Utils/ReactComponents/Link.js";
-import { observer } from "mobx-react";
 import { MGLObserver } from "mobx-graphlink";
 let ProposalUI = class ProposalUI extends BaseComponent {
     render() {
@@ -73,7 +71,7 @@ let ProposalUI_Inner = class ProposalUI_Inner extends BaseComponentPlus({}, { ed
                 React.createElement(Row, { mt: 5 },
                     React.createElement(Button, { text: "Save", enabled: dataError == null, onLeftClick: async () => {
                             let postUpdates = GetUpdates(proposal, this.editorUI.GetNewData());
-                            await new UpdateProposal({ graph }, { id: proposal.id, updates: postUpdates }).RunOnServer();
+                            await new UpdateProposal({ id: proposal.id, updates: postUpdates }).RunOnServer();
                             this.SetState({ editing: false, dataError: null });
                         } }),
                     React.createElement(Button, { ml: 5, text: "Cancel", onLeftClick: async () => {
@@ -101,7 +99,7 @@ let ProposalUI_Inner = class ProposalUI_Inner extends BaseComponentPlus({}, { ed
                                     title: `Delete proposal`, cancelButton: true,
                                     message: `Delete this proposal?`,
                                     onOK: async () => {
-                                        await new DeleteProposal({ graph }, { id: proposal.id }).RunOnServer();
+                                        await new DeleteProposal({ id: proposal.id }).RunOnServer();
                                     }
                                 });
                             } }),
@@ -110,12 +108,12 @@ let ProposalUI_Inner = class ProposalUI_Inner extends BaseComponentPlus({}, { ed
                         " at ",
                         manager.FormatTime(proposal.editedAt, "YYYY-MM-DD HH:mm:ss")),
                     React.createElement(CheckBox, { ml: "auto", mr: 5, text: "Completed", value: proposal.completedAt != null, enabled: IsUserAdmin(manager.GetUserID()), onChange: val => {
-                            new UpdateProposal({ graph }, { id: proposal.id, updates: { completedAt: proposal.completedAt == null ? Date.now() : null } }).RunOnServer();
+                            new UpdateProposal({ id: proposal.id, updates: { completedAt: proposal.completedAt == null ? Date.now() : null } }).RunOnServer();
                         } })))));
     }
 };
 ProposalUI_Inner = __decorate([
-    observer
+    MGLObserver
 ], ProposalUI_Inner);
 export { ProposalUI_Inner };
 class ActionBar_Left extends BaseComponent {

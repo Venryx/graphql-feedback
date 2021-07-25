@@ -14,7 +14,6 @@ import { GetRankingScoreToAddForUserRankingIndex } from "../Proposals.js";
 import { MakeDraggable } from "../../Utils/UI/DNDHelpers.js";
 import { DraggableInfo } from "../../Utils/UI/DNDStructures.js";
 import ReactDOM from "react-dom";
-import { graph } from "../../Utils/Database/MobXGraphlink.js";
 import { Link } from "../../Utils/ReactComponents/Link.js";
 import { MGLObserver } from "mobx-graphlink";
 let portal;
@@ -63,7 +62,7 @@ let ProposalEntryUI = class ProposalEntryUI extends BaseComponentPlus({}, {}) {
                     : (proposal.completedAt ? "✔️" : rankingScore ? CE(rankingScore).RoundTo_Str(.001, null, false) : "")),
                 columnType == "userRanking" && !asDragPreview &&
                     React.createElement(Button, { text: "X", style: { margin: "-3px 0 -3px 5px", padding: "3px 5px" }, onClick: () => {
-                            new SetProposalOrder({ graph }, { proposalID: proposal.id, userID: manager.GetUserID(), index: -1 }).RunOnServer();
+                            new SetProposalOrder({ proposalID: proposal.id, userID: manager.GetUserID(), index: -1 }).RunOnServer();
                         } }))));
         // if drag preview, we have to put in portal, since otherwise the "filter" effect of ancestors causes the {position:fixed} style to not be relative-to-page
         if (asDragPreview) {

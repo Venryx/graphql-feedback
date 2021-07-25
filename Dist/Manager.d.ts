@@ -24,9 +24,9 @@ export declare type User = {
     displayName: string;
 };
 export declare class Manager {
-    Populate(data: Omit<Manager, "Populate" | "store">): void;
+    Populate(data: Omit<Manager, "Populate" | "rootStore">): void;
     GetStore: () => any;
-    get store(): any;
+    get rootStore(): any;
     apollo: ApolloClient<NormalizedCacheObject>;
     FormatTime: (time: number, formatStr: string) => string;
     logTypes: LogTypes;

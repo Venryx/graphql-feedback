@@ -27,7 +27,7 @@ __decorate([
     Field({ $ref: "UUID" }, { opt: true })
 ], UserInfo.prototype, "id", void 0);
 __decorate([
-    DB((t, n) => t.text(n)),
+    DB((t, n) => t.specificType(n, "text[]")),
     Field({ items: { $ref: "UUID" } })
 ], UserInfo.prototype, "proposalsOrder", void 0);
 UserInfo = __decorate([

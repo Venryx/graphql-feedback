@@ -1,8 +1,7 @@
+import {CE, NN} from "js-vextensions";
+import {Command, CommandMeta, DBHelper, dbp, GetDocs, SimpleSchema} from "mobx-graphlink";
 import {GetProposal} from "../../Store/db/proposals.js";
 import {SetProposalOrder} from "./SetProposalOrder.js";
-import {CE, emptyArray_forLoading, NN} from "js-vextensions";
-import {GetAsync, GetDocs, Command, AssertV, dbp, DBHelper, CommandMeta, SimpleSchema} from "mobx-graphlink";
-import {graph} from "../../Utils/Database/MobXGraphlink.js";
 
 //@UserEdit
 @CommandMeta({
@@ -12,18 +11,18 @@ import {graph} from "../../Utils/Database/MobXGraphlink.js";
 })
 export class DeleteProposal extends Command<{id: string}> {
 	//posts: Post[];
-	sub_removalsFromUserOrderings: SetProposalOrder[];
+	sub_removalsFromUserOrderings: SetProposalOrder[] = [];
 	Validate() {
 		let {id} = this.payload;
 		let proposal = NN(GetProposal(id));
 		//this.posts = await GetAsync(()=>GetProposalPosts(proposal));
 
-		let userDatas = GetDocs({graph}, a=>a.feedback_userDatas);
+		let userInfos = GetDocs({}, a=>a.feedback_userInfos);
 		this.sub_removalsFromUserOrderings = [];
 		//let userDatasWithOrderingContainingProposal = userDatas.filter(userData=>CE(CE(userData.proposalIndexes).VValues(true)).Contains(id));
-		let userDatasWithOrderingContainingProposal = userDatas.filter(userData=>CE(userData.proposalsOrder).Contains(id));
-		for (let userID of userDatasWithOrderingContainingProposal.map(userData=>userData["_key"])) {
-			let subcommand = new SetProposalOrder({graph}, {proposalID: id, userID, index: -1});
+		let userInfosWithOrderingContainingProposal = userInfos.filter(userData=>CE(userData.proposalsOrder).Contains(id));
+		for (let userID of userInfosWithOrderingContainingProposal.map(userData=>userData.id)) {
+			let subcommand = new SetProposalOrder({proposalID: id, userID, index: -1}).MarkAsSubcommand(this);
 			subcommand.Validate();
 			this.sub_removalsFromUserOrderings.push(subcommand);
 		}

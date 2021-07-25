@@ -19,7 +19,6 @@ import { ToJSON, FromJSON, CE } from "js-vextensions";
 import { DragDropContext as DragDropContext_Beautiful, Droppable } from "react-beautiful-dnd";
 import { DroppableInfo } from "../Utils/UI/DNDStructures.js";
 import { store } from "../Store/index.js";
-import { graph } from "../Utils/Database/MobXGraphlink.js";
 import { GetDocs, MGLObserver } from "mobx-graphlink";
 import { RunInAction } from "../Utils/General/General.js";
 /*export class ProposalsUI_Outer extends BaseComponent<Props, {}> {
@@ -49,7 +48,7 @@ let ProposalsUI = class ProposalsUI extends BaseComponentPlus({ subNavBarWidth: 
                     if (sourceDroppableInfo.type == targetDroppableInfo.type && sourceIndex < targetIndex) {
                         targetIndex++;
                     }
-                    new SetProposalOrder({ graph }, { proposalID: draggableInfo.proposalID, userID: manager.GetUserID(), index: targetIndex }).RunOnServer();
+                    new SetProposalOrder({ proposalID: draggableInfo.proposalID, userID: manager.GetUserID(), index: targetIndex }).RunOnServer();
                 }
             }
         });
@@ -103,7 +102,7 @@ let ProposalsColumn = class ProposalsColumn extends BaseComponentPlus({}, {}) {
     render() {
         let { proposals, type } = this.props;
         let userID = manager.GetUserID();
-        const userData = CE(GetDocs({ graph }, a => a.feedback_userDatas)).ToMapObj(a => a["_key"], a => a);
+        const userData = CE(GetDocs({}, a => a.feedback_userInfos)).ToMapObj(a => a["_key"], a => a);
         const showCompleted = store.main.proposals[`${type}s_showCompleted`];
         let shownProposals = proposals.filter(a => a.type == type && (!a.completedAt || showCompleted));
         //let proposalsOrder = GetProposalsOrder(userID);

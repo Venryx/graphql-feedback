@@ -12,7 +12,6 @@ import { colors } from "../GlobalStyles.js";
 import { Proposal } from "../../Store/db/proposals/@Proposal.js";
 import { ProposalDetailsUI } from "./Proposal/ProposalDetailsUI.js";
 import {store} from "../../Store/index.js";
-import {graph} from "../../Utils/Database/MobXGraphlink.js";
 import {runInAction} from "mobx";
 import {Link} from "../../Utils/ReactComponents/Link.js";
 import {observer} from "mobx-react";
@@ -57,7 +56,7 @@ export class ProposalUI extends BaseComponent<ProposalUI_Props, {}> {
 	}
 }
 
-@observer
+@MGLObserver
 export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposal}, {editing: false, dataError: null as string}) {
 	editorUI: ProposalDetailsUI;
 	render() {
@@ -75,7 +74,7 @@ export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposa
 					<Row mt={5}>
 						<Button text="Save" enabled={dataError == null} onLeftClick={async ()=> {
 							let postUpdates = GetUpdates(proposal, this.editorUI.GetNewData());
-							await new UpdateProposal({graph}, {id: proposal.id, updates: postUpdates}).RunOnServer();
+							await new UpdateProposal({id: proposal.id, updates: postUpdates}).RunOnServer();
 							this.SetState({editing: false, dataError: null});
 						}}/>
 						<Button ml={5} text="Cancel" onLeftClick={async ()=> {
@@ -108,7 +107,7 @@ export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposa
 									title: `Delete proposal`, cancelButton: true,
 									message: `Delete this proposal?`,
 									onOK: async ()=> {
-										await new DeleteProposal({graph}, {id: proposal.id}).RunOnServer();
+										await new DeleteProposal({id: proposal.id}).RunOnServer();
 									}
 								});
 							}}/>}
@@ -116,7 +115,7 @@ export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposa
 							{proposal.text != null ? "edited" : "deleted"} at {manager.FormatTime(proposal.editedAt, "YYYY-MM-DD HH:mm:ss")}
 						</Span>}
 						<CheckBox ml="auto" mr={5} text="Completed" value={proposal.completedAt != null} enabled={IsUserAdmin(manager.GetUserID())} onChange={val=>{
-							new UpdateProposal({graph}, {id: proposal.id, updates: {completedAt: proposal.completedAt == null ? Date.now() : null}}).RunOnServer();
+							new UpdateProposal({id: proposal.id, updates: {completedAt: proposal.completedAt == null ? Date.now() : null}}).RunOnServer();
 						}}/>
 					</Row>
 				</Column>

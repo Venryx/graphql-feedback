@@ -2,20 +2,34 @@ import { GetErrorMessagesUnderElement, Clone, E } from "js-vextensions";
 import React from "react";
 import { Column, Pre, Row, RowLR, TextInput } from "react-vcomponents";
 import { BaseComponent, GetInnerComp, GetDOM } from "react-vextensions";
-import { MarkdownEditor, MarkdownToolbar } from "react-vmarkdown";
+//import { MarkdownEditor, MarkdownToolbar } from "react-vmarkdown";
 import { BoxController, ShowMessageBox } from "react-vmessagebox";
 import { AddProposal } from "../../../Server/Commands/AddProposal.js";
 import { Proposal } from "../../../Store/db/proposals/@Proposal.js";
 import {store} from "../../../Store/index.js";
 import {runInAction} from "mobx";
-import {graph} from "../../../Utils/Database/MobXGraphlink.js";
 import {Link} from "../../../Utils/ReactComponents/Link.js";
 import {RunInAction} from "../../../Utils/General/General.js";
 
-let aa = {MarkdownEditor} as any;
-
 export type _MainType = Proposal;
 let MTName = "Proposal";
+
+// this weirdness is done so that "graphql-feedback" can be imported into NodeJS without parse-time errors (react-vmarkdown cannot easily be made NodeJS-safe, since imports from several codemirror files)
+let reactVMarkdown_importCache: typeof import("react-vmarkdown");
+export function GetReactVMarkdown_Safe() {
+	if (reactVMarkdown_importCache == null) {
+		(async()=>{
+			reactVMarkdown_importCache = await import("react-vmarkdown");
+		})();
+	}
+	return reactVMarkdown_importCache ?? {
+		MarkdownToolbar: ()=><div/>,
+		MarkdownEditor: ()=><div/>,
+	};
+}
+if (typeof window != "undefined" && typeof navigator != "undefined") {
+	GetReactVMarkdown_Safe(); // trigger at parse-time, if in browser
+}
 
 export type ProposalDetailsUI_Props = {baseData: _MainType, forNew: boolean, enabled?: boolean, style?, onChange?: (newData: _MainType, comp: ProposalDetailsUI)=>void};
 export class ProposalDetailsUI extends BaseComponent<ProposalDetailsUI_Props, {newData: _MainType}> {
@@ -35,6 +49,8 @@ export class ProposalDetailsUI extends BaseComponent<ProposalDetailsUI_Props, {n
 			this.Update();
 		};
 
+		const {MarkdownToolbar, MarkdownEditor} = GetReactVMarkdown_Safe();
+
 		let splitAt = 50;
 		return (
 			<Column style={E({width: "100%", style})}>
@@ -51,7 +67,7 @@ export class ProposalDetailsUI extends BaseComponent<ProposalDetailsUI_Props, {n
 							<MarkdownToolbar editor={()=>this.refs.editor} /*excludeCommands={['h1', 'h2', 'h3', 'h4', 'italic', 'quote']}*/>
 								<Link to="https://guides.github.com/features/mastering-markdown" style={{marginLeft: 10}}>How to add links, images, etc.</Link>
 							</MarkdownToolbar>}
-						<aa.MarkdownEditor ref="editor" toolbar={false} value={newData.text || ""} onChange={val=>Change(newData.text = val)}
+						<MarkdownEditor ref="editor" toolbar={false} value={newData.text || ""} onChange={val=>Change(newData.text = val)}
 							options={E({
 								scrollbarStyle: "overlay",
 								lineWrapping: true,
@@ -92,7 +108,7 @@ export function ShowAddProposalDialog(userID: string, type: string) {
 			);
 		},
 		onOK: async ()=> {
-			let {id} = await new AddProposal({graph}, {data: newEntry}).RunOnServer();
+			let {id} = await new AddProposal({data: newEntry}).RunOnServer();
 			RunInAction("ShowAddProposalDialog.onOK", ()=>store.main.proposals.selectedProposalID = id);
 		}
 	});

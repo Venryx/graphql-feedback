@@ -7,7 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { GetProposal } from "../db/proposals.js";
 import { makeObservable, observable } from "mobx";
 import { CreateAccessor } from "mobx-graphlink";
-import { graph } from "../../Utils/Database/MobXGraphlink.js";
 export class ProposalsState {
     constructor() {
         Object.defineProperty(this, "selectedProposalID", {
@@ -40,10 +39,11 @@ __decorate([
 __decorate([
     observable
 ], ProposalsState.prototype, "issues_showCompleted", void 0);
-export const GetSelectedProposalID = CreateAccessor({ graph }, function () {
-    return this["store"].main.proposals.selectedProposalID;
+export const GetSelectedProposalID = CreateAccessor(function () {
+    //return (this["store"] as Lib_RootState).main.proposals.selectedProposalID;
+    return this["store"].feedback.main.proposals.selectedProposalID;
 });
-export const GetSelectedProposal = CreateAccessor({ graph }, () => {
+export const GetSelectedProposal = CreateAccessor(() => {
     let selectedID = GetSelectedProposalID();
     return GetProposal(selectedID);
 });

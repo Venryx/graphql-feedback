@@ -1,5 +1,4 @@
 import { CreateAccessor, GetDoc } from "mobx-graphlink";
-import { emptyArray } from "../../General.js";
 /*export type ProposalIndexSet = { [key: number]: string; }; // index -> proposalID
 AddSchema({patternProperties: {"^[0-9]+$": {type: "number"}}}, "ProposalIndexSet");*/
 /*export const GetProposalIndexes = StoreAccessor(s=>(userID: string): ProposalIndexSet => {
@@ -9,13 +8,9 @@ AddSchema({patternProperties: {"^[0-9]+$": {type: "number"}}}, "ProposalIndexSet
 export const GetProposalOrder = StoreAccessor(s=>(userID: string): string[] => {
     return CE(GetProposalIndexes(userID)).VValues(true);
 });*/
-export const GetProposalsOrder = CreateAccessor((userID, undefinedForLoading = false) => {
-    if (userID == null)
-        return emptyArray;
+export const GetProposalsOrder = CreateAccessor((userID) => {
     let userData = GetDoc({}, a => a.feedback_userInfos.get(userID));
-    if (undefinedForLoading && userData === undefined)
-        return undefined; // undefined from mobx-graphlink means still loading
-    return (userData === null || userData === void 0 ? void 0 : userData.proposalsOrder) || emptyArray;
+    return userData === null || userData === void 0 ? void 0 : userData.proposalsOrder;
 });
 export const GetProposalIndex = CreateAccessor((userID, proposalID) => {
     if (userID == null || proposalID == null)

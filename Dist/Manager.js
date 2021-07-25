@@ -104,7 +104,7 @@ export class Manager {
         CE(this).Extend(data);
         OnPopulated_listeners.forEach(a => a());
     }
-    get store() { return this.GetStore(); }
+    get rootStore() { return this.GetStore(); }
 }
 export const manager = new Manager();
 export let OnPopulated_listeners = [];
