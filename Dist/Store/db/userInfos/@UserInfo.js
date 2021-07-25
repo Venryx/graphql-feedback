@@ -5,7 +5,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { DB, Field, MGLClass } from "mobx-graphlink";
-let UserInfo = class UserInfo {
+let UserInfo = 
+// renamed; postgraphile has issues with "Datas" (when "PgRowByUniqueConstraint.js" singularizes the collection to "userData", it has conflict with the "userData" resolver already present)
+//export class UserData {
+class UserInfo {
     constructor() {
         //proposalIndexes: ProposalIndexSet;
         Object.defineProperty(this, "id", {
@@ -32,5 +35,7 @@ __decorate([
 ], UserInfo.prototype, "proposalsOrder", void 0);
 UserInfo = __decorate([
     MGLClass({ table: "feedback_userInfos" })
+    // renamed; postgraphile has issues with "Datas" (when "PgRowByUniqueConstraint.js" singularizes the collection to "userData", it has conflict with the "userData" resolver already present)
+    //export class UserData {
 ], UserInfo);
 export { UserInfo };
