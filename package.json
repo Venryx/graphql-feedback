@@ -1,7 +1,7 @@
 {
   "name": "graphql-feedback",
   "description": "Feedback (proposals + issues + roadmap) solution built using ReactJS, MobX, and GraphQL (Postgraphile/PostgreSQL).",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Venryx (https://venryx.com)",
   "main": "Dist/index.js",
   "typings": "Dist/index.d.ts",
