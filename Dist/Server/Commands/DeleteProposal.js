@@ -25,7 +25,7 @@ let DeleteProposal = class DeleteProposal extends Command {
         let { id } = this.payload;
         let proposal = NN(GetProposal(id));
         //this.posts = await GetAsync(()=>GetProposalPosts(proposal));
-        let userDatas = GetDocs({ graph }, a => a.feedback_userData);
+        let userDatas = GetDocs({ graph }, a => a.feedback_userDatas);
         this.sub_removalsFromUserOrderings = [];
         //let userDatasWithOrderingContainingProposal = userDatas.filter(userData=>CE(CE(userData.proposalIndexes).VValues(true)).Contains(id));
         let userDatasWithOrderingContainingProposal = userDatas.filter(userData => CE(userData.proposalsOrder).Contains(id));

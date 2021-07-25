@@ -18,7 +18,7 @@ export class DeleteProposal extends Command<{id: string}> {
 		let proposal = NN(GetProposal(id));
 		//this.posts = await GetAsync(()=>GetProposalPosts(proposal));
 
-		let userDatas = GetDocs({graph}, a=>a.feedback_userData);
+		let userDatas = GetDocs({graph}, a=>a.feedback_userDatas);
 		this.sub_removalsFromUserOrderings = [];
 		//let userDatasWithOrderingContainingProposal = userDatas.filter(userData=>CE(CE(userData.proposalIndexes).VValues(true)).Contains(id));
 		let userDatasWithOrderingContainingProposal = userDatas.filter(userData=>CE(userData.proposalsOrder).Contains(id));

@@ -1,6 +1,3 @@
-export interface UserData {
-    proposalsOrder: string[];
-}
 export declare const GetProposalsOrder: ((this: void | import("mobx-graphlink").AccessorCallPlan, userID: string, undefinedForLoading?: any) => string[]) & {
     Async: (userID: string, undefinedForLoading?: any) => Promise<string[]>;
     Wait: (this: void | import("mobx-graphlink").AccessorCallPlan, userID: string, undefinedForLoading?: any) => string[];

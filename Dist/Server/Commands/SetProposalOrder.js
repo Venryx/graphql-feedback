@@ -38,7 +38,11 @@ let SetProposalOrder = class SetProposalOrder extends Command {
     DeclareDBUpdates(db) {
         let { userID, proposalID } = this.payload;
         //updates[`userData/${userID}/.proposalsOrder`] = WrapDBValue(this.newOrder, {merge: true});
-        db.set(dbp `feedback_userData/${userID}/.proposalsOrder`, this.newOrder);
+        //db.set(dbp`feedback_userData/${userID}/.proposalsOrder`, this.newOrder);
+        db.set(dbp `feedback_userData/${userID}`, {
+            id: this.userInfo.id,
+            proposalsOrder: this.newOrder,
+        });
     }
 };
 SetProposalOrder = __decorate([

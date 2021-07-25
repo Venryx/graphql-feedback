@@ -2,11 +2,6 @@ import {CreateAccessor, GetDoc} from "mobx-graphlink";
 import {emptyArray} from "../../General.js";
 import {graph} from "../../Utils/Database/MobXGraphlink.js";
 
-export interface UserData {
-	//proposalIndexes: ProposalIndexSet;
-	proposalsOrder: string[];
-}
-
 /*export type ProposalIndexSet = { [key: number]: string; }; // index -> proposalID
 AddSchema({patternProperties: {"^[0-9]+$": {type: "number"}}}, "ProposalIndexSet");*/
 
@@ -19,7 +14,7 @@ export const GetProposalOrder = StoreAccessor({graph}, s=>(userID: string): stri
 });*/
 export const GetProposalsOrder = CreateAccessor({graph}, (userID: string, undefinedForLoading = false): string[]=>{
 	if (userID == null) return emptyArray;
-	let userData = GetDoc({graph}, a=>a.feedback_userData.get(userID));
+	let userData = GetDoc({graph}, a=>a.feedback_userDatas.get(userID));
 	if (undefinedForLoading && userData === undefined) return undefined; // undefined from mobx-graphlink means still loading
 	return userData?.proposalsOrder || emptyArray;
 });

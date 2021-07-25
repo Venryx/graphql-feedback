@@ -101,7 +101,7 @@ export class ProposalsColumn extends BaseComponentPlus({} as {proposals: Proposa
 		let {proposals, type} = this.props;
 		let userID = manager.GetUserID();
 
-		const userData = CE(GetDocs({graph}, a=>a.feedback_userData)).ToMap(a=>a["_key"], a=>a);
+		const userData = CE(GetDocs({graph}, a=>a.feedback_userDatas)).ToMapObj(a=>a["_key"], a=>a);
 		const showCompleted = store.main.proposals[`${type}s_showCompleted`];
 
 		let shownProposals = proposals.filter(a=>a.type == type && (!a.completedAt || showCompleted));
