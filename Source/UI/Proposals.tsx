@@ -72,7 +72,7 @@ export class ProposalsUI extends BaseComponentPlus({subNavBarWidth: 0} as {subNa
 				targetIndex++;
 			}
 
-			new SetProposalOrder({proposalID: draggableInfo.proposalID, userID: manager.GetUserID(), index: targetIndex}).RunOnServer();
+			new SetProposalOrder({proposalID: draggableInfo.proposalID!, index: targetIndex}).RunOnServer();
 		}
 	};
 }
@@ -193,7 +193,7 @@ export class ProposalsUserRankingColumn extends BaseComponentPlus({} as {proposa
 				last={index == proposals.length - 1} proposal={proposal} columnType="userRanking"/>;
 		});
 
-		const droppableInfo = new DroppableInfo({type: "ProposalsUserRankingColumn", userID: user ? user._key : null});
+		const droppableInfo = new DroppableInfo({type: "ProposalsUserRankingColumn", userID: user ? user.id : undefined});
 		return (
 			<Column style={ES({flex: 1, height: "100%"})}>
 				<Column className="clickThrough" style={{background: "rgba(0,0,0,.7)", borderRadius: "10px 10px 0 0"}}>

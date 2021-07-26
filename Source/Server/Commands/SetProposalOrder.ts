@@ -5,17 +5,20 @@ import {GetProposalsOrder} from "../../Store/db/userInfos.js";
 @CommandMeta({
 	payloadSchema: ()=>SimpleSchema({
 		$proposalID: {$ref: "UUID"},
-		$userID: {$ref: "UUID"},
 		$index: {type: "number"},
 	}),
 })
-export class SetProposalOrder extends Command<{proposalID: string, userID: string, index: number}> {
+export class SetProposalOrder extends Command<{proposalID: string, index: number}> {
+	// from parent command
+	userOverride: string;
+	get userID() { return this.userOverride ?? this.userInfo.id; }
+	
 	newOrder: string[];
 	Validate() {
-		let {proposalID, userID, index} = this.payload;
+		let {proposalID, index} = this.payload;
 
 		//let oldIndexes = (await GetAsync(()=>GetDoc(a=>a.userData.get(userID))))?.proposalOrder || {};
-		let oldOrder = GetProposalsOrder(userID);
+		let oldOrder = GetProposalsOrder(this.userID);
 		//let idsOrdered = CE(oldIndexes).VValues(true);
 		//let newOrder = oldOrder.slice();
 		this.newOrder = oldOrder.slice();
@@ -31,11 +34,11 @@ export class SetProposalOrder extends Command<{proposalID: string, userID: strin
 	}
 	
 	DeclareDBUpdates(db: DBHelper) {
-		let {userID, proposalID} = this.payload;
+		let {proposalID} = this.payload;
 		//updates[`userData/${userID}/.proposalsOrder`] = WrapDBValue(this.newOrder, {merge: true});
 		//db.set(dbp`feedback_userData/${userID}/.proposalsOrder`, this.newOrder);
-		db.set(dbp`feedback_userInfos/${userID}`, {
-			id: this.userInfo.id,
+		db.set(dbp`feedback_userInfos/${this.userID}`, {
+			id: this.userID,
 			proposalsOrder: this.newOrder,
 		});
 	}

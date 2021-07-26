@@ -11,7 +11,7 @@ let MTName = "Proposal";
 	payloadSchema: ()=>SimpleSchema({
 		$id: {type: "string"},
 		$updates: NewSchema({
-			properties: CE(GetSchemaJSON(MTName).properties).IncludeKeys("title", "text", "completedAt"),
+			properties: CE(GetSchemaJSON(MTName).properties!).IncludeKeys("title", "text", "completedAt"),
 		}),
 	}),
 })

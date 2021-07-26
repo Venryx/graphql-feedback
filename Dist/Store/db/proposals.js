@@ -1,7 +1,5 @@
-import { GetDoc, GetDocs, CreateAccessor } from "mobx-graphlink";
+import { CreateAccessor, GetDoc, GetDocs } from "mobx-graphlink";
 export const GetProposal = CreateAccessor((id) => {
-    if (id == null)
-        return null;
     return GetDoc({}, a => a.feedback_proposals.get(id));
 });
 export const GetProposals = CreateAccessor(() => {

@@ -10,6 +10,13 @@ import { GetProposalsOrder } from "../../Store/db/userInfos.js";
 let SetProposalOrder = class SetProposalOrder extends Command {
     constructor() {
         super(...arguments);
+        // from parent command
+        Object.defineProperty(this, "userOverride", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
         Object.defineProperty(this, "newOrder", {
             enumerable: true,
             configurable: true,
@@ -17,10 +24,11 @@ let SetProposalOrder = class SetProposalOrder extends Command {
             value: void 0
         });
     }
+    get userID() { var _a; return (_a = this.userOverride) !== null && _a !== void 0 ? _a : this.userInfo.id; }
     Validate() {
-        let { proposalID, userID, index } = this.payload;
+        let { proposalID, index } = this.payload;
         //let oldIndexes = (await GetAsync(()=>GetDoc(a=>a.userData.get(userID))))?.proposalOrder || {};
-        let oldOrder = GetProposalsOrder(userID);
+        let oldOrder = GetProposalsOrder(this.userID);
         //let idsOrdered = CE(oldIndexes).VValues(true);
         //let newOrder = oldOrder.slice();
         this.newOrder = oldOrder.slice();
@@ -35,11 +43,11 @@ let SetProposalOrder = class SetProposalOrder extends Command {
         //AssertValidate(`BookEvent`, event, `Book-event invalid`);*/
     }
     DeclareDBUpdates(db) {
-        let { userID, proposalID } = this.payload;
+        let { proposalID } = this.payload;
         //updates[`userData/${userID}/.proposalsOrder`] = WrapDBValue(this.newOrder, {merge: true});
         //db.set(dbp`feedback_userData/${userID}/.proposalsOrder`, this.newOrder);
-        db.set(dbp `feedback_userInfos/${userID}`, {
-            id: this.userInfo.id,
+        db.set(dbp `feedback_userInfos/${this.userID}`, {
+            id: this.userID,
             proposalsOrder: this.newOrder,
         });
     }
@@ -48,7 +56,6 @@ SetProposalOrder = __decorate([
     CommandMeta({
         payloadSchema: () => SimpleSchema({
             $proposalID: { $ref: "UUID" },
-            $userID: { $ref: "UUID" },
             $index: { type: "number" },
         }),
     })

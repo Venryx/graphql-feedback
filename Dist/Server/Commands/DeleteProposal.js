@@ -29,7 +29,8 @@ let DeleteProposal = class DeleteProposal extends Command {
         //let userDatasWithOrderingContainingProposal = userDatas.filter(userData=>CE(CE(userData.proposalIndexes).VValues(true)).Contains(id));
         let userInfosWithOrderingContainingProposal = userInfos.filter(userData => CE(userData.proposalsOrder).Contains(id));
         for (let userID of userInfosWithOrderingContainingProposal.map(userData => userData.id)) {
-            let subcommand = new SetProposalOrder({ proposalID: id, userID, index: -1 }).MarkAsSubcommand(this);
+            let subcommand = new SetProposalOrder({ proposalID: id, index: -1 }).MarkAsSubcommand(this);
+            subcommand.userOverride = userID;
             subcommand.Validate();
             this.sub_removalsFromUserOrderings.push(subcommand);
         }

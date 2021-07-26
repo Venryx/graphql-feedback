@@ -6,6 +6,6 @@ export declare class Proposal {
     text: string;
     creator: string;
     createdAt: number;
-    editedAt: number;
-    completedAt: number;
+    editedAt?: number;
+    completedAt?: number;
 }

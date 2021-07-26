@@ -12,6 +12,7 @@ import ReactDOM from "react-dom";
 import {observer} from "mobx-react";
 import {Link} from "../../Utils/ReactComponents/Link.js";
 import {MGLObserver} from "mobx-graphlink";
+import {n} from "../../Utils/@Internal/Types.js";
 
 let portal: HTMLElement;
 OnPopulated(()=> {
@@ -42,7 +43,7 @@ OnPopulated(()=> {
 })*/
 @MGLObserver
 export class ProposalEntryUI extends BaseComponentPlus({} as ProposalEntryUI_Props, {}) {
-	innerRoot: Column;
+	innerRoot: Column|n;
 	render() {
 		let {index, last, proposal, orderIndex, rankingScore, columnType, style, dragInfo} = this.props;
 		const creator = proposal && manager.GetUser(proposal.creator);
@@ -60,12 +61,12 @@ export class ProposalEntryUI extends BaseComponentPlus({} as ProposalEntryUI_Pro
 					<Link text={proposal.title} actionFunc={s=>s.main.proposals.selectedProposalID = proposal.id} style={ES({fontSize: "15px", flex: 1})}/>
 					<span style={{float: "right"}}>
 						{columnType == "userRanking"
-							? "#" + (index + 1) + (proposal.completedAt ? " (✔️)" : ` (+${CE(GetRankingScoreToAddForUserRankingIndex(orderIndex)).RoundTo_Str(.001, null, false)})`)
-							: (proposal.completedAt ? "✔️" : rankingScore ? CE(rankingScore).RoundTo_Str(.001, null, false) : "")}
+							? "#" + (index + 1) + (proposal.completedAt ? " (✔️)" : ` (+${CE(GetRankingScoreToAddForUserRankingIndex(orderIndex!)).RoundTo_Str(.001, undefined, false)})`)
+							: (proposal.completedAt ? "✔️" : rankingScore ? CE(rankingScore).RoundTo_Str(.001, undefined, false) : "")}
 					</span>
 					{columnType == "userRanking" && !asDragPreview &&
 						<Button text="X" style={{margin: "-3px 0 -3px 5px", padding: "3px 5px"}} onClick={()=> {
-							new SetProposalOrder({proposalID: proposal.id, userID: manager.GetUserID(), index: -1}).RunOnServer();
+							new SetProposalOrder({proposalID: proposal.id, index: -1}).RunOnServer();
 						}}/>}
 				</Row>
 			</div>

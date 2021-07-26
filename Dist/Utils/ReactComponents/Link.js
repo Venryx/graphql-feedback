@@ -45,6 +45,7 @@ export class Link extends BaseComponentPlus({}, {}) {
         }
     }
     render() {
+        var _a;
         let { text, actionFunc, to, target, children, ...rest } = this.props;
         if (actionFunc) {
             //const newState = produce(manager.store, draft=>{
@@ -55,7 +56,7 @@ export class Link extends BaseComponentPlus({}, {}) {
             const newURL = WithStore(newState, ()=>manager.GetNewURL());
             //const newURL = manager.GetNewURL.WS(newState)();
             to = newURL.toString();*/
-            to = manager.GetNewURLForStoreChanges(actionFunc);
+            to = (_a = manager.GetNewURLForStoreChanges(actionFunc)) !== null && _a !== void 0 ? _a : undefined;
         }
         //if (manager.prodEnv && to == null) return; // defensive
         //const href = this.context.router.history.createHref(typeof to === 'string' ? {pathname: to} : to)

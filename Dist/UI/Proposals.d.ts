@@ -12,7 +12,7 @@ export declare class ProposalsUI extends ProposalsUI_base {
         subNavBarWidth: number;
     };
     render(): JSX.Element;
-    OnDragEnd: (result: any) => any;
+    OnDragEnd: (result: any) => undefined;
 }
 export declare function GetRankingScoreToAddForUserRankingIndex(indexInRankingOrder: number): number;
 declare const ProposalsColumn_base: (new (..._: any[]) => BaseComponent<{

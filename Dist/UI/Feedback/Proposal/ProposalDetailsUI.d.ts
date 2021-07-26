@@ -2,10 +2,7 @@
 import { BaseComponent } from "react-vextensions";
 import { Proposal } from "../../../Store/db/proposals/@Proposal.js";
 export declare type _MainType = Proposal;
-export declare function GetReactVMarkdown_Safe(): typeof import("react-vmarkdown") | {
-    MarkdownToolbar: () => JSX.Element;
-    MarkdownEditor: () => JSX.Element;
-};
+export declare function GetReactVMarkdown_Safe(): typeof import("react-vmarkdown");
 export declare type ProposalDetailsUI_Props = {
     baseData: _MainType;
     forNew: boolean;

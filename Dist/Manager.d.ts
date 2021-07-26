@@ -20,7 +20,7 @@ export declare type Link_Props = {
     actionFunc?: ActionFunc<Lib_RootState>;
 } & React.HTMLProps<HTMLAnchorElement>;
 export declare type User = {
-    _key?: string;
+    id: string;
     displayName: string;
 };
 export declare class Manager {
@@ -32,12 +32,12 @@ export declare class Manager {
     logTypes: LogTypes;
     ShowSignInPopup: () => void;
     GetUserID: () => string | n;
-    GetUser: (id: string) => User | n;
-    GetUserPermissionGroups: (userID: string) => PermissionGroupSet;
+    GetUser: (id: string | n) => User | n;
+    GetUserPermissionGroups: (userID: string | n) => PermissionGroupSet;
     GetNewURLForStoreChanges: (actionFunc: ActionFunc<Lib_RootState>) => string | null;
     MarkdownRenderer: any;
-    actionBarZIndex?: number;
+    actionBarZIndex?: number | undefined;
 }
 export declare const manager: Manager;
-export declare let OnPopulated_listeners: any[];
+export declare let OnPopulated_listeners: (() => any)[];
 export declare function OnPopulated(listener: () => any): void;

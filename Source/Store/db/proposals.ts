@@ -1,10 +1,9 @@
-import { Proposal } from "./proposals/@Proposal.js";
-import {GetDoc, GetDocs, CreateAccessor} from "mobx-graphlink";
+import {CreateAccessor, GetDoc, GetDocs} from "mobx-graphlink";
+import {n} from "../../Utils/@Internal/Types.js";
 
-export const GetProposal = CreateAccessor((id: string): Proposal=>{
-	if (id == null) return null;
-	return GetDoc({}, a=>a.feedback_proposals.get(id));
+export const GetProposal = CreateAccessor((id: string|n)=>{
+	return GetDoc({}, a=>a.feedback_proposals.get(id!));
 });
-export const GetProposals = CreateAccessor((): Proposal[]=>{
+export const GetProposals = CreateAccessor(()=>{
 	return GetDocs({}, a=>a.feedback_proposals);
 });

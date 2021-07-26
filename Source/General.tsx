@@ -1,9 +1,10 @@
 import {Assert} from "js-vextensions";
 import {Proposal} from "./index.js";
 import {manager} from "./Manager.js";
+import {n} from "./Utils/@Internal/Types.js";
 
 export function RemoveDuplicates(items: any) {
-	var result = [];
+	var result = [] as any[];
 	for (let item of items) {
 		if (result.indexOf(item) == -1) {
 			result.push(item);
@@ -25,7 +26,7 @@ export enum AccessLevel {
 	if (userID == null) return null;
 	return GetData("userExtras", userID, "permissionGroups");
 }*/
-export function GetUserAccessLevel(userID: string) {
+export function GetUserAccessLevel(userID: string|n) {
 	let groups = manager.GetUserPermissionGroups(userID);
 	if (groups == null) return AccessLevel.Basic;
 	
@@ -35,16 +36,16 @@ export function GetUserAccessLevel(userID: string) {
 	//if (groups.basic) return AccessLevel.Basic;
 	Assert(false);
 }
-export function IsUserBasic(userID: string) { return (manager.GetUserPermissionGroups(userID) || {} as any).basic; }
-export function IsUserVerified(userID: string) { return (manager.GetUserPermissionGroups(userID) || {} as any).verified; }
-export function IsUserMod(userID: string) { return (manager.GetUserPermissionGroups(userID) || {} as any).mod; }
-export function IsUserAdmin(userID: string) { return (manager.GetUserPermissionGroups(userID) || {} as any).admin; }
+export function IsUserBasic(userID: string|n) { return (manager.GetUserPermissionGroups(userID) || {} as any).basic; }
+export function IsUserVerified(userID: string|n) { return (manager.GetUserPermissionGroups(userID) || {} as any).verified; }
+export function IsUserMod(userID: string|n) { return (manager.GetUserPermissionGroups(userID) || {} as any).mod; }
+export function IsUserAdmin(userID: string|n) { return (manager.GetUserPermissionGroups(userID) || {} as any).admin; }
 
-export function IsUserBasicOrAnon(userID: string) {
+export function IsUserBasicOrAnon(userID: string|n) {
 	let permissionGroups = manager.GetUserPermissionGroups(userID);
 	return permissionGroups == null || permissionGroups.basic;
 }
-export function IsUserCreatorOrMod(userID: string, entity: Proposal) {
+export function IsUserCreatorOrMod(userID: string|n, entity: Proposal) {
 	let permissionGroups = manager.GetUserPermissionGroups(userID);
 	if (permissionGroups == null) return false;
 	return (entity.creator == userID && permissionGroups.basic) || permissionGroups.mod;

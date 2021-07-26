@@ -48,7 +48,7 @@ let ProposalsUI = class ProposalsUI extends BaseComponentPlus({ subNavBarWidth: 
                     if (sourceDroppableInfo.type == targetDroppableInfo.type && sourceIndex < targetIndex) {
                         targetIndex++;
                     }
-                    new SetProposalOrder({ proposalID: draggableInfo.proposalID, userID: manager.GetUserID(), index: targetIndex }).RunOnServer();
+                    new SetProposalOrder({ proposalID: draggableInfo.proposalID, index: targetIndex }).RunOnServer();
                 }
             }
         });
@@ -175,7 +175,7 @@ let ProposalsUserRankingColumn = class ProposalsUserRankingColumn extends BaseCo
         let proposalUIs = proposals.map((proposal, index) => {
             return React.createElement(ProposalEntryUI, { key: index, index: index, orderIndex: proposalOrder_uncompleted.indexOf(proposal.id), last: index == proposals.length - 1, proposal: proposal, columnType: "userRanking" });
         });
-        const droppableInfo = new DroppableInfo({ type: "ProposalsUserRankingColumn", userID: user ? user._key : null });
+        const droppableInfo = new DroppableInfo({ type: "ProposalsUserRankingColumn", userID: user ? user.id : undefined });
         return (React.createElement(Column, { style: ES({ flex: 1, height: "100%" }) },
             React.createElement(Column, { className: "clickThrough", style: { background: "rgba(0,0,0,.7)", borderRadius: "10px 10px 0 0" } },
                 React.createElement(Row, { style: { position: "relative", height: 40, padding: 10 } },

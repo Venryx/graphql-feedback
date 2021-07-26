@@ -19,7 +19,7 @@ export type Link_Props = {
 } & React.HTMLProps<HTMLAnchorElement>;
 
 export type User = {
-	_key?: string;
+	id: string;
 	displayName: string;
 	//photoURL: string;
 };
@@ -42,8 +42,8 @@ export class Manager {
 
 	ShowSignInPopup: ()=>void;
 	GetUserID: ()=>string|n;
-	GetUser: (id: string)=>User|n;
-	GetUserPermissionGroups: (userID: string)=>PermissionGroupSet;
+	GetUser: (id: string|n)=>User|n;
+	GetUserPermissionGroups: (userID: string|n)=>PermissionGroupSet;
 
 	GetNewURLForStoreChanges: (actionFunc: ActionFunc<Lib_RootState>)=>string|null;
 
@@ -52,5 +52,5 @@ export class Manager {
 }
 export const manager = new Manager();
 
-export let OnPopulated_listeners = [];
+export let OnPopulated_listeners = [] as (()=>any)[];
 export function OnPopulated(listener: ()=>any) { OnPopulated_listeners.push(listener); }

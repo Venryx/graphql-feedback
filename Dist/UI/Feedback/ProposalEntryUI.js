@@ -58,11 +58,11 @@ let ProposalEntryUI = class ProposalEntryUI extends BaseComponentPlus({}, {}) {
             React.createElement(Row, { ref: c => this.innerRoot = c, p: "7px 10px", style: E({ background: index % 2 == 0 ? "rgba(30,30,30,.7)" : "rgba(0,0,0,.7)" }, last && { borderRadius: "0 0 10px 10px" }, style) },
                 React.createElement(Link, { text: proposal.title, actionFunc: s => s.main.proposals.selectedProposalID = proposal.id, style: ES({ fontSize: "15px", flex: 1 }) }),
                 React.createElement("span", { style: { float: "right" } }, columnType == "userRanking"
-                    ? "#" + (index + 1) + (proposal.completedAt ? " (✔️)" : ` (+${CE(GetRankingScoreToAddForUserRankingIndex(orderIndex)).RoundTo_Str(.001, null, false)})`)
-                    : (proposal.completedAt ? "✔️" : rankingScore ? CE(rankingScore).RoundTo_Str(.001, null, false) : "")),
+                    ? "#" + (index + 1) + (proposal.completedAt ? " (✔️)" : ` (+${CE(GetRankingScoreToAddForUserRankingIndex(orderIndex)).RoundTo_Str(.001, undefined, false)})`)
+                    : (proposal.completedAt ? "✔️" : rankingScore ? CE(rankingScore).RoundTo_Str(.001, undefined, false) : "")),
                 columnType == "userRanking" && !asDragPreview &&
                     React.createElement(Button, { text: "X", style: { margin: "-3px 0 -3px 5px", padding: "3px 5px" }, onClick: () => {
-                            new SetProposalOrder({ proposalID: proposal.id, userID: manager.GetUserID(), index: -1 }).RunOnServer();
+                            new SetProposalOrder({ proposalID: proposal.id, index: -1 }).RunOnServer();
                         } }))));
         // if drag preview, we have to put in portal, since otherwise the "filter" effect of ancestors causes the {position:fixed} style to not be relative-to-page
         if (asDragPreview) {

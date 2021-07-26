@@ -48,9 +48,9 @@ export class Link extends BaseComponentPlus({} as Link_Props, {}) {
 			event.preventDefault();
 			//manager.store.dispatch(replaceURL ? replace(to) : push(to));
 			if (replaceURL) {
-				history.replaceState(null, null, to);
+				history.replaceState(null, null as any, to);
 			} else {
-				history.pushState(null, null, to);
+				history.pushState(null, null as any, to);
 			}
 		}
 	}
@@ -67,7 +67,7 @@ export class Link extends BaseComponentPlus({} as Link_Props, {}) {
 			const newURL = WithStore(newState, ()=>manager.GetNewURL());
 			//const newURL = manager.GetNewURL.WS(newState)();
 			to = newURL.toString();*/
-			to = manager.GetNewURLForStoreChanges(actionFunc);
+			to = manager.GetNewURLForStoreChanges(actionFunc) ?? undefined;
 		}
 
 		//if (manager.prodEnv && to == null) return; // defensive

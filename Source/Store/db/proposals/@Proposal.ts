@@ -33,9 +33,9 @@ export class Proposal {
 	
 	@DB((t, n)=>t.bigInteger(n).nullable())
 	@Field({type: "number"}, {opt: true})
-	editedAt: number;
+	editedAt?: number;
 	
 	@DB((t, n)=>t.bigInteger(n).nullable())
 	@Field({type: "number"}, {opt: true})
-	completedAt: number;
+	completedAt?: number;
 }

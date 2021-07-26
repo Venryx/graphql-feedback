@@ -10,6 +10,7 @@ import {store} from "../../../Store/index.js";
 import {runInAction} from "mobx";
 import {Link} from "../../../Utils/ReactComponents/Link.js";
 import {RunInAction} from "../../../Utils/General/General.js";
+import {n} from "../../../Utils/@Internal/Types.js";
 
 export type _MainType = Proposal;
 let MTName = "Proposal";
@@ -92,7 +93,7 @@ export class ProposalDetailsUI extends BaseComponent<ProposalDetailsUI_Props, {n
 export function ShowAddProposalDialog(userID: string, type: string) {
 	let newEntry = new Proposal({type});
 	
-	let detailsUI: ProposalDetailsUI;
+	let detailsUI: ProposalDetailsUI|n;
 	let error = null;
 	let Change = (..._)=>boxController.UpdateUI();
 	let boxController: BoxController = ShowMessageBox({
@@ -102,7 +103,7 @@ export function ShowAddProposalDialog(userID: string, type: string) {
 			return (
 				<Column style={{width: 600}}>
 					<ProposalDetailsUI ref={c=>detailsUI = c} baseData={newEntry} forNew={true}
-						onChange={val=>Change(newEntry = val, error = detailsUI.GetValidationError())}/>
+						onChange={val=>Change(newEntry = val, error = detailsUI!.GetValidationError())}/>
 					{error && error != "Please fill out this field." && <Row mt={5} style={{color: "rgba(200,70,70,1)"}}>{error}</Row>}
 				</Column>
 			);

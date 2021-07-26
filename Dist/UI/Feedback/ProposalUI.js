@@ -108,7 +108,7 @@ let ProposalUI_Inner = class ProposalUI_Inner extends BaseComponentPlus({}, { ed
                         " at ",
                         manager.FormatTime(proposal.editedAt, "YYYY-MM-DD HH:mm:ss")),
                     React.createElement(CheckBox, { ml: "auto", mr: 5, text: "Completed", value: proposal.completedAt != null, enabled: IsUserAdmin(manager.GetUserID()), onChange: val => {
-                            new UpdateProposal({ id: proposal.id, updates: { completedAt: proposal.completedAt == null ? Date.now() : null } }).RunOnServer();
+                            new UpdateProposal({ id: proposal.id, updates: { completedAt: proposal.completedAt == null ? Date.now() : undefined } }).RunOnServer();
                         } })))));
     }
 };

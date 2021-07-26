@@ -16,6 +16,7 @@ import {runInAction} from "mobx";
 import {Link} from "../../Utils/ReactComponents/Link.js";
 import {observer} from "mobx-react";
 import {MGLObserver} from "mobx-graphlink";
+import {n} from "../../Utils/@Internal/Types.js";
 
 export type ProposalUI_Props = {proposal: Proposal, subNavBarWidth?: number};
 @MGLObserver
@@ -37,8 +38,8 @@ export class ProposalUI extends BaseComponent<ProposalUI_Props, {}> {
 				//marginTop: 30, height: "calc(100% - 30px)",
 				height: "100%", // scroll-bar overlays action-bar-right, but I guess that's better than sub-nav-bar not showing text behind it
 			})}>
-				<ActionBar_Left proposal={proposal} subNavBarWidth={subNavBarWidth}/>
-				<ActionBar_Right proposal={proposal} subNavBarWidth={subNavBarWidth}/>
+				<ActionBar_Left proposal={proposal} subNavBarWidth={subNavBarWidth!}/>
+				<ActionBar_Right proposal={proposal} subNavBarWidth={subNavBarWidth!}/>
 				<ScrollView ref="scrollView" scrollVBarStyle={{width: 10}} style={ES({flex: 1}/*styles.fillParent_abs*/)}>
 					<Column style={{width: 960, margin: "50px auto 20px auto", filter: "drop-shadow(rgb(0, 0, 0) 0px 0px 10px)"}}>
 						<ProposalUI_Inner proposal={proposal}/>
@@ -57,8 +58,8 @@ export class ProposalUI extends BaseComponent<ProposalUI_Props, {}> {
 }
 
 @MGLObserver
-export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposal}, {editing: false, dataError: null as string}) {
-	editorUI: ProposalDetailsUI;
+export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposal}, {editing: false, dataError: null as string|n}) {
+	editorUI: ProposalDetailsUI|n;
 	render() {
 		let {proposal} = this.props;
 		const creator = manager.GetUser(proposal.creator);
@@ -73,7 +74,7 @@ export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposa
 						}}/>
 					<Row mt={5}>
 						<Button text="Save" enabled={dataError == null} onLeftClick={async ()=> {
-							let postUpdates = GetUpdates(proposal, this.editorUI.GetNewData());
+							let postUpdates = GetUpdates(proposal, this.editorUI!.GetNewData());
 							await new UpdateProposal({id: proposal.id, updates: postUpdates}).RunOnServer();
 							this.SetState({editing: false, dataError: null});
 						}}/>
@@ -115,7 +116,7 @@ export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposa
 							{proposal.text != null ? "edited" : "deleted"} at {manager.FormatTime(proposal.editedAt, "YYYY-MM-DD HH:mm:ss")}
 						</Span>}
 						<CheckBox ml="auto" mr={5} text="Completed" value={proposal.completedAt != null} enabled={IsUserAdmin(manager.GetUserID())} onChange={val=>{
-							new UpdateProposal({id: proposal.id, updates: {completedAt: proposal.completedAt == null ? Date.now() : null}}).RunOnServer();
+							new UpdateProposal({id: proposal.id, updates: {completedAt: proposal.completedAt == null ? Date.now() : undefined}}).RunOnServer();
 						}}/>
 					</Row>
 				</Column>
