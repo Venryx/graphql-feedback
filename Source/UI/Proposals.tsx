@@ -17,6 +17,8 @@ import {store} from "../Store/index.js";
 import {observer} from "mobx-react";
 import {GetDocs, MGLObserver} from "mobx-graphlink";
 import {RunInAction} from "../Utils/General/General.js";
+import {cssHelper} from "react-vextensions";
+import {mwhTo0} from "./GlobalStyles.js";
 
 /*export class ProposalsUI_Outer extends BaseComponent<Props, {}> {
 	render() {
@@ -37,18 +39,23 @@ export class ProposalsUI extends BaseComponentPlus({subNavBarWidth: 0} as {subNa
 		let {subNavBarWidth} = this.props;
 		const proposals = GetProposals();
 		const selectedProposal = GetSelectedProposal();
+		let {key, css} = cssHelper(this);
 
 		if (selectedProposal) {
 			return <ProposalUI proposal={selectedProposal} subNavBarWidth={subNavBarWidth}/>;
 		}
 		
 		if (proposals == null) {
-			return <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100%", fontSize: "25px"}}>Loading proposals...</div>;
+			return <div className={key("ProposalsUI")} style={css({display: "flex", alignItems: "center", justifyContent: "center", height: "100%", fontSize: "25px"})}>Loading proposals...</div>;
 		}
 
 		return (
 			<DragDropContext_Beautiful onDragEnd={this.OnDragEnd}>
-				<Row style={ES({marginTop: 10, height: "calc(100% - 10px)", flex: 1, padding: 10, filter: "drop-shadow(rgb(0, 0, 0) 0px 0px 10px)"})}>
+				<Row className={key("ProposalsUI")}
+					style={css({
+						marginTop: 10, height: "calc(100% - 10px)", flex: 1, ...mwhTo0, padding: 10, filter: "drop-shadow(rgb(0, 0, 0) 0px 0px 10px)",
+					})}
+				>
 					<ProposalsColumn proposals={proposals} type="feature"/>
 					<ProposalsColumn proposals={proposals} type="issue" ml={10}/>
 					<ProposalsUserRankingColumn proposals={proposals} ml={10}/>
@@ -143,15 +150,16 @@ export class ProposalsColumn extends BaseComponentPlus({} as {proposals: Proposa
 		});
 
 		const droppableInfo = new DroppableInfo({type: "ProposalsColumn", proposalType: type});
+		let {css} = cssHelper(this);
 		return (
-			<Column style={ES({flex: 1, height: "100%"})}>
-				<Column className="clickThrough" style={{height: 40, background: "rgba(0,0,0,.7)", borderRadius: "10px 10px 0 0"}}>
-					<Row style={{position: "relative", height: 40, padding: 10}}>
+			<Column style={css({flex: 1, ...mwhTo0, height: "100%"})}>
+				<Column className="clickThrough" style={css({height: 40, background: "rgba(0,0,0,.7)", borderRadius: "10px 10px 0 0"})}>
+					<Row style={css({position: "relative", height: 40, padding: 10})}>
 						{/*<Pre>Show: </Pre>*/}
 						<CheckBox ml={5} text="Show completed" value={showCompleted} onChange={val=>{
 							RunInAction("ProposalsColumn.showCompleted.onChange", ()=>store.main.proposals[`${type}s_showCompleted`] = val);
 						}}/>
-						<span style={{position: "absolute", left: "50%", transform: "translateX(-50%)", fontSize: "18px"}}>
+						<span style={css({position: "absolute", left: "50%", transform: "translateX(-50%)", fontSize: "18px"})}>
 							{type.replace(/^(.)/, (m,s0)=>s0.toUpperCase())}s
 						</span>
 						<Button text={type == "feature" ? "Propose feature" : "Report issue"} ml="auto" onClick={()=> {
@@ -161,7 +169,7 @@ export class ProposalsColumn extends BaseComponentPlus({} as {proposals: Proposa
 					</Row>
 				</Column>
 				<Droppable type="Proposal" droppableId={ToJSON(droppableInfo)}>{(provided, snapshot)=>(
-					<ScrollView ref={c=>provided.innerRef(GetDOM(c))} scrollVBarStyle={{width: 10}} style={ES({flex: 1})}>
+					<ScrollView ref={c=>provided.innerRef(GetDOM(c))} scrollVBarStyle={{width: 10}} style={css({flex: 1, ...mwhTo0})}>
 						{shownProposals.length == 0 && provided.placeholder == null &&
 							<Row p="7px 10px" style={{background: "rgba(30,30,30,.7)", borderRadius: "0 0 10px 10px"}}>
 								There are currently no {type == "feature" ? "feature proposals" : "issue reports"}.
@@ -194,20 +202,21 @@ export class ProposalsUserRankingColumn extends BaseComponentPlus({} as {proposa
 		});
 
 		const droppableInfo = new DroppableInfo({type: "ProposalsUserRankingColumn", userID: user ? user.id : undefined});
+		const {css} = cssHelper(this);
 		return (
-			<Column style={ES({flex: 1, height: "100%"})}>
-				<Column className="clickThrough" style={{background: "rgba(0,0,0,.7)", borderRadius: "10px 10px 0 0"}}>
-					<Row style={{position: "relative", height: 40, padding: 10}}>
-						<span style={{position: "absolute", left: "50%", transform: "translateX(-50%)", fontSize: "18px"}}>Your ranking</span>
+			<Column style={css({flex: 1, ...mwhTo0, height: "100%"})}>
+				<Column className="clickThrough" style={css({background: "rgba(0,0,0,.7)", borderRadius: "10px 10px 0 0"})}>
+					<Row style={css({position: "relative", height: 40, padding: 10})}>
+						<span style={css({position: "absolute", left: "50%", transform: "translateX(-50%)", fontSize: "18px"})}>Your ranking</span>
 					</Row>
-					<div style={{padding: 10, paddingTop: 0, alignItems: "center", fontSize: "13px", textAlign: "center"}}>
+					<div style={css({padding: 10, paddingTop: 0, alignItems: "center", fontSize: "13px", textAlign: "center"})}>
 						Drag proposals onto this list to "vote" for them. Items at the top get the highest score increase.
 					</div>
 				</Column>
 				<Droppable type="Proposal" droppableId={ToJSON(droppableInfo)}>{(provided, snapshot)=>(
-					<ScrollView ref={c=>provided.innerRef(GetDOM(c))} scrollVBarStyle={{width: 10}} style={ES({flex: 1})}>
+					<ScrollView ref={c=>provided.innerRef(GetDOM(c))} scrollVBarStyle={css({width: 10})} style={css({flex: 1, ...mwhTo0})}>
 						{proposals.length == 0 && provided.placeholder == null &&
-							<Row p="7px 10px" style={{background: "rgba(30,30,30,.7)", borderRadius: "0 0 10px 10px"}}>
+							<Row p="7px 10px" style={css({background: "rgba(30,30,30,.7)", borderRadius: "0 0 10px 10px"})}>
 								You have not yet added any proposals to your ranking.
 							</Row>}
 						{proposalUIs}

@@ -20,3 +20,6 @@ export * from "./Store/db/userInfos.js";
 export {UserInfo as Feedback_UserInfo} from "./Store/db/userInfos/@UserInfo.js";
 
 export * from "./UI/Proposals.js";
+// we expose these, to make it easier for people to add css-helper hooks
+export * from "./UI/Feedback/ProposalUI.js";
+export * from "./UI/Feedback/ProposalEntryUI.js";

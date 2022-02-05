@@ -16,7 +16,7 @@ export var colors = {
 .VMenu > div:first-child { border-top: initial !important; }
 `);*/
 
-declare global { function ES(...styles): any; } G({ES});
+/*declare global { function ES(...styles): any; } G({ES});
 // same as E(...), except applies extra things for style-objects
 function ES(...styles) {
 	let result = E(...styles);
@@ -28,4 +28,8 @@ function ES(...styles) {
 	}
 
 	return result;
-}
+}*/
+export const mwhTo0 = {
+	minWidth: 0,
+	minHeight: 0,
+};

@@ -10,6 +10,7 @@ export declare var styles: {
 export declare var colors: {
     navBarBoxShadow: string;
 };
-declare global {
-    function ES(...styles: any[]): any;
-}
+export declare const mwhTo0: {
+    minWidth: number;
+    minHeight: number;
+};
