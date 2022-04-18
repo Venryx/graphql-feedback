@@ -118,7 +118,7 @@ export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposa
 							{proposal.text != null ? "edited" : "deleted"} at {manager.FormatTime(proposal.editedAt, "YYYY-MM-DD HH:mm:ss")}
 						</Span>}
 						<CheckBox ml="auto" mr={5} text="Completed" value={proposal.completedAt != null} enabled={IsUserAdmin(manager.GetUserID())} onChange={val=>{
-							new UpdateProposal({id: proposal.id, updates: {completedAt: proposal.completedAt == null ? Date.now() : undefined}}).RunOnServer();
+							new UpdateProposal({id: proposal.id, updates: {completedAt: proposal.completedAt == null ? Date.now() : null as any}}).RunOnServer();
 						}}/>
 					</Row>
 				</Column>
