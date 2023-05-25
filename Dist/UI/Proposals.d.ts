@@ -3,7 +3,7 @@ import { BaseComponent } from "react-vextensions";
 import { Proposal } from "../Store/db/proposals/@Proposal.js";
 declare const ProposalsUI_base: (new (..._: any[]) => BaseComponent<{
     subNavBarWidth: number;
-}, {}, unknown>) & {
+}, {}, object>) & {
     renderCount: number;
     lastRenderTime: number;
 };
@@ -18,7 +18,7 @@ export declare function GetRankingScoreToAddForUserRankingIndex(indexInRankingOr
 declare const ProposalsColumn_base: (new (..._: any[]) => BaseComponent<{
     proposals: Proposal[];
     type: string;
-}, {}, unknown>) & {
+}, {}, object>) & {
     renderCount: number;
     lastRenderTime: number;
 };
@@ -27,7 +27,7 @@ export declare class ProposalsColumn extends ProposalsColumn_base {
 }
 declare const ProposalsUserRankingColumn_base: (new (..._: any[]) => BaseComponent<{
     proposals: Proposal[];
-}, {}, unknown>) & {
+}, {}, object>) & {
     renderCount: number;
     lastRenderTime: number;
 };

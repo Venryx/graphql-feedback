@@ -18,7 +18,7 @@ declare const ProposalUI_Inner_base: (new (..._: any[]) => BaseComponent<{
 }, {
     editing: boolean;
     dataError: string | n;
-}, unknown>) & {
+}, object>) & {
     renderCount: number;
     lastRenderTime: number;
 };

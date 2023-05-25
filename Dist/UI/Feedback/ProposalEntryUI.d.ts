@@ -14,7 +14,7 @@ export declare type ProposalEntryUI_Props = {
 } & {
     dragInfo?: DragInfo;
 };
-declare const ProposalEntryUI_base: (new (..._: any[]) => BaseComponent<ProposalEntryUI_Props, {}, unknown>) & {
+declare const ProposalEntryUI_base: (new (..._: any[]) => BaseComponent<ProposalEntryUI_Props, {}, object>) & {
     renderCount: number;
     lastRenderTime: number;
 };

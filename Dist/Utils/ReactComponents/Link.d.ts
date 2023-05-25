@@ -13,7 +13,7 @@ export declare type Link_Props = {
     replace?: boolean;
     actionFunc?: ActionFunc<Lib_RootState>;
 } & Omit<React.HTMLProps<HTMLAnchorElement>, "href">;
-declare const Link_base: (new (..._: any[]) => BaseComponent<Link_Props, {}, unknown>) & {
+declare const Link_base: (new (..._: any[]) => BaseComponent<Link_Props, {}, object>) & {
     renderCount: number;
     lastRenderTime: number;
 };
