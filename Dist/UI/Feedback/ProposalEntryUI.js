@@ -15,7 +15,7 @@ import { MakeDraggable } from "../../Utils/UI/DNDHelpers.js";
 import { DraggableInfo } from "../../Utils/UI/DNDStructures.js";
 import ReactDOM from "react-dom";
 import { Link } from "../../Utils/ReactComponents/Link.js";
-import { MGLObserver } from "mobx-graphlink";
+import { ObserverMGL } from "mobx-graphlink";
 import { mwhTo0 } from "../GlobalStyles.js";
 let portal;
 OnPopulated(() => {
@@ -74,6 +74,6 @@ let ProposalEntryUI = class ProposalEntryUI extends BaseComponentPlus({}, {}) {
     }
 };
 ProposalEntryUI = __decorate([
-    MGLObserver
+    ObserverMGL
 ], ProposalEntryUI);
 export { ProposalEntryUI };

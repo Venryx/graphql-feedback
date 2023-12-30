@@ -34,7 +34,7 @@ let SetProposalOrder = class SetProposalOrder extends Command {
         this.newOrder = oldOrder.slice();
         //let oldIndex = oldOrder.indexOf(proposalID);
         if (index != -1) {
-            CE(this.newOrder).Move(proposalID, index, true);
+            CE(this.newOrder).Move(proposalID, index, "relative-slot"); // todo: ensure the new-index option is correct
         }
         else {
             CE(this.newOrder).Remove(proposalID);

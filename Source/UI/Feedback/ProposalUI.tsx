@@ -15,11 +15,11 @@ import {store} from "../../Store/index.js";
 import {runInAction} from "mobx";
 import {Link} from "../../Utils/ReactComponents/Link.js";
 import {observer} from "mobx-react";
-import {MGLObserver} from "mobx-graphlink";
+import {ObserverMGL} from "mobx-graphlink";
 import {n} from "../../Utils/@Internal/Types.js";
 
 export type ProposalUI_Props = {proposal: Proposal, subNavBarWidth?: number};
-@MGLObserver
+@ObserverMGL
 export class ProposalUI extends BaseComponent<ProposalUI_Props, {}> {
 	static defaultProps = {subNavBarWidth: 0};
 	render() {
@@ -58,7 +58,7 @@ export class ProposalUI extends BaseComponent<ProposalUI_Props, {}> {
 	}
 }
 
-@MGLObserver
+@ObserverMGL
 export class ProposalUI_Inner extends BaseComponentPlus({} as {proposal: Proposal}, {editing: false, dataError: null as string|n}) {
 	editorUI: ProposalDetailsUI|n;
 	render() {

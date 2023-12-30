@@ -17,7 +17,7 @@ import { GetUpdates } from "../../Utils/Database/DatabaseHelpers.js";
 import { colors, mwhTo0 } from "../GlobalStyles.js";
 import { ProposalDetailsUI } from "./Proposal/ProposalDetailsUI.js";
 import { Link } from "../../Utils/ReactComponents/Link.js";
-import { MGLObserver } from "mobx-graphlink";
+import { ObserverMGL } from "mobx-graphlink";
 let ProposalUI = class ProposalUI extends BaseComponent {
     render() {
         let { proposal, subNavBarWidth } = this.props;
@@ -47,7 +47,7 @@ Object.defineProperty(ProposalUI, "defaultProps", {
     value: { subNavBarWidth: 0 }
 });
 ProposalUI = __decorate([
-    MGLObserver
+    ObserverMGL
 ], ProposalUI);
 export { ProposalUI };
 let ProposalUI_Inner = class ProposalUI_Inner extends BaseComponentPlus({}, { editing: false, dataError: null }) {
@@ -115,7 +115,7 @@ let ProposalUI_Inner = class ProposalUI_Inner extends BaseComponentPlus({}, { ed
     }
 };
 ProposalUI_Inner = __decorate([
-    MGLObserver
+    ObserverMGL
 ], ProposalUI_Inner);
 export { ProposalUI_Inner };
 class ActionBar_Left extends BaseComponent {

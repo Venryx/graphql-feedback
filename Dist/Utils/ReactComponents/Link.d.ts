@@ -20,6 +20,6 @@ declare const Link_base: (new (..._: any[]) => BaseComponent<Link_Props, {}, obj
 export declare class Link extends Link_base {
     static ValidateProps(props: Link_Props): void;
     handleClick(event: any): void;
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export {};

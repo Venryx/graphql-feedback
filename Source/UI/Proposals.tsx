@@ -15,7 +15,7 @@ import {DragDropContext as DragDropContext_Beautiful, Droppable} from "react-bea
 import {DroppableInfo, DraggableInfo} from "../Utils/UI/DNDStructures.js";
 import {store} from "../Store/index.js";
 import {observer} from "mobx-react";
-import {GetDocs, MGLObserver} from "mobx-graphlink";
+import {GetDocs, ObserverMGL} from "mobx-graphlink";
 import {RunInAction} from "../Utils/General/General.js";
 import {cssHelper} from "react-vextensions";
 import {mwhTo0} from "./GlobalStyles.js";
@@ -26,7 +26,7 @@ import {mwhTo0} from "./GlobalStyles.js";
 	}
 }*/
 
-@MGLObserver
+@ObserverMGL
 export class ProposalsUI extends BaseComponentPlus({subNavBarWidth: 0} as {subNavBarWidth: number}, {}) {
 	static defaultProps = {subNavBarWidth: 0};
 	
@@ -100,7 +100,7 @@ function GetIncompleteProposalsInOrder(order: string[], proposals: Proposal[]) {
 	});
 }
 
-@MGLObserver
+@ObserverMGL
 @ApplyBasicStyles
 export class ProposalsColumn extends BaseComponentPlus({} as {proposals: Proposal[], type: string}, {}) {
 	render() {
@@ -183,7 +183,7 @@ export class ProposalsColumn extends BaseComponentPlus({} as {proposals: Proposa
 	}
 }
 
-@MGLObserver
+@ObserverMGL
 @ApplyBasicStyles
 export class ProposalsUserRankingColumn extends BaseComponentPlus({} as {proposals: Proposal[]}, {}) {
 	render() {

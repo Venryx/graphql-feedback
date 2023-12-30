@@ -2,7 +2,6 @@
 	"compilerOptions": {
 		"rootDir": "Source",
 		//"sourceMap": true, // commented; didn't work last time I tried, so keeping Dist folder cleaner
-		"watch": true,
 		//"module": "ES2015",
 		"module": "ES2020",
 		"moduleResolution": "node",

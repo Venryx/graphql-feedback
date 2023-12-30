@@ -41,7 +41,7 @@ export class DeleteProposal extends Command<{id: string}> {
 		}*/
 
 		for (const subcommand of this.sub_removalsFromUserOrderings) {
-			db.add(subcommand.GetDBUpdates());
+			db.add(subcommand.GetDBUpdates(db));
 		}
 	}
 }

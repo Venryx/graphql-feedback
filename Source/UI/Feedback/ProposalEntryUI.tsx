@@ -11,7 +11,7 @@ import {DraggableInfo} from "../../Utils/UI/DNDStructures.js";
 import ReactDOM from "react-dom";
 import {observer} from "mobx-react";
 import {Link} from "../../Utils/ReactComponents/Link.js";
-import {MGLObserver} from "mobx-graphlink";
+import {ObserverMGL} from "mobx-graphlink";
 import {n} from "../../Utils/@Internal/Types.js";
 import {mwhTo0} from "../GlobalStyles.js";
 
@@ -42,7 +42,7 @@ OnPopulated(()=> {
 		index,
 	};
 })*/
-@MGLObserver
+@ObserverMGL
 export class ProposalEntryUI extends BaseComponentPlus({} as ProposalEntryUI_Props, {}) {
 	innerRoot: Column|n;
 	render() {

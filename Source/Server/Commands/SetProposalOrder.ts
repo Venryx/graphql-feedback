@@ -25,7 +25,7 @@ export class SetProposalOrder extends Command<{proposalID: string, index: number
 		
 		//let oldIndex = oldOrder.indexOf(proposalID);
 		if (index != -1) {
-			CE(this.newOrder).Move(proposalID, index, true);
+			CE(this.newOrder).Move(proposalID, index, "relative-slot"); // todo: ensure the new-index option is correct
 		} else {
 			CE(this.newOrder).Remove(proposalID);
 		}

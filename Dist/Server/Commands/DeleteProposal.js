@@ -45,7 +45,7 @@ let DeleteProposal = class DeleteProposal extends Command {
             updates[`posts/${post._id}`] = null;
         }*/
         for (const subcommand of this.sub_removalsFromUserOrderings) {
-            db.add(subcommand.GetDBUpdates());
+            db.add(subcommand.GetDBUpdates(db));
         }
     }
 };

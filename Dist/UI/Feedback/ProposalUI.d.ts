@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { Proposal } from "../../Store/db/proposals/@Proposal.js";
 import { ProposalDetailsUI } from "./Proposal/ProposalDetailsUI.js";
@@ -11,7 +11,7 @@ export declare class ProposalUI extends BaseComponent<ProposalUI_Props, {}> {
     static defaultProps: {
         subNavBarWidth: number;
     };
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 declare const ProposalUI_Inner_base: (new (..._: any[]) => BaseComponent<{
     proposal: Proposal;
@@ -24,6 +24,6 @@ declare const ProposalUI_Inner_base: (new (..._: any[]) => BaseComponent<{
 };
 export declare class ProposalUI_Inner extends ProposalUI_Inner_base {
     editorUI: ProposalDetailsUI | n;
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export {};

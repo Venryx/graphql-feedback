@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { BaseComponent } from "react-vextensions";
 import { Proposal } from "../Store/db/proposals/@Proposal.js";
 declare const ProposalsUI_base: (new (..._: any[]) => BaseComponent<{
@@ -11,7 +11,7 @@ export declare class ProposalsUI extends ProposalsUI_base {
     static defaultProps: {
         subNavBarWidth: number;
     };
-    render(): JSX.Element;
+    render(): React.JSX.Element;
     OnDragEnd: (result: any) => undefined;
 }
 export declare function GetRankingScoreToAddForUserRankingIndex(indexInRankingOrder: number): number;
@@ -23,7 +23,7 @@ declare const ProposalsColumn_base: (new (..._: any[]) => BaseComponent<{
     lastRenderTime: number;
 };
 export declare class ProposalsColumn extends ProposalsColumn_base {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 declare const ProposalsUserRankingColumn_base: (new (..._: any[]) => BaseComponent<{
     proposals: Proposal[];
@@ -32,6 +32,6 @@ declare const ProposalsUserRankingColumn_base: (new (..._: any[]) => BaseCompone
     lastRenderTime: number;
 };
 export declare class ProposalsUserRankingColumn extends ProposalsUserRankingColumn_base {
-    render(): JSX.Element;
+    render(): React.JSX.Element;
 }
 export {};

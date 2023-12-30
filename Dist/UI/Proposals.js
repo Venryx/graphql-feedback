@@ -19,7 +19,7 @@ import { ToJSON, FromJSON, CE } from "js-vextensions";
 import { DragDropContext as DragDropContext_Beautiful, Droppable } from "react-beautiful-dnd";
 import { DroppableInfo } from "../Utils/UI/DNDStructures.js";
 import { store } from "../Store/index.js";
-import { GetDocs, MGLObserver } from "mobx-graphlink";
+import { GetDocs, ObserverMGL } from "mobx-graphlink";
 import { RunInAction } from "../Utils/General/General.js";
 import { cssHelper } from "react-vextensions";
 import { mwhTo0 } from "./GlobalStyles.js";
@@ -86,7 +86,7 @@ Object.defineProperty(ProposalsUI, "defaultProps", {
     value: { subNavBarWidth: 0 }
 });
 ProposalsUI = __decorate([
-    MGLObserver
+    ObserverMGL
 ], ProposalsUI);
 export { ProposalsUI };
 export function GetRankingScoreToAddForUserRankingIndex(indexInRankingOrder) {
@@ -166,7 +166,7 @@ let ProposalsColumn = class ProposalsColumn extends BaseComponentPlus({}, {}) {
     }
 };
 ProposalsColumn = __decorate([
-    MGLObserver,
+    ObserverMGL,
     ApplyBasicStyles
 ], ProposalsColumn);
 export { ProposalsColumn };
@@ -196,7 +196,7 @@ let ProposalsUserRankingColumn = class ProposalsUserRankingColumn extends BaseCo
     }
 };
 ProposalsUserRankingColumn = __decorate([
-    MGLObserver,
+    ObserverMGL,
     ApplyBasicStyles
 ], ProposalsUserRankingColumn);
 export { ProposalsUserRankingColumn };
